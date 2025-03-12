@@ -32,7 +32,7 @@ jobs:
           echo "압축 시작 전 파일 확인"
           ls -a
           echo "압축 시작"
-          tar --exclude='./.git' --exclude='./data' --ignore-failed-read -czvf run.tar.gz ./
+          tar --exclude='./.git' --ignore-failed-read -czvf run.tar.gz ./
           echo "압축 완료..."
           ls -a
 
