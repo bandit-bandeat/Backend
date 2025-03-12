@@ -23,31 +23,14 @@ jobs:
         with:
           python-version: '3.11.2'
 
-      - name: 의존성 설치
-        run: |
-          python -m venv venv
-          source venv/bin/activate
-          pip install -r requirements.txt
-          pip install build
-          python --version
-          pip --version
-
       - name: .env 파일 동적 생성
         run: |
           echo "${{ secrets.CHANGE_SERVICE_ENV }}" > ./.env
           ls
 
-      - name: 빌드
+      - name: 파일 압축
         run: |
-          source venv/bin/activate
-          python -m build
-          ls
-
-
-      - name: 관리상 빌드된 결과물의 이름을 변경 처리
-        run: |
-          ls
-          mv ./dist/*.tar.gz ./run.tar.gz
+          tar -czvf run.tar.gz ./
           ls
 
       - name: EC2에 파일 업로드
@@ -71,5 +54,10 @@ jobs:
             mv /home/ubuntu/changeService/demo/run.tar.gz /home/ubuntu/changeService/run.tar.gz
             cd /home/ubuntu/changeService
             fuser -k -n tcp 5000 || true
-            nohup python3 app.py > ./output.log 2>&1 &
+            tar -xzvf run.tar.gz
+            cd change_service-1.0.0
+            python3 -m venv venv
+            source venv/bin/activate
+            pip install .
+            nohup python3 run.tar.gz > ./output.log 2>&1 &
             rm -rf /home/ubuntu/changeService/demo
