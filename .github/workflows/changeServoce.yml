@@ -21,7 +21,7 @@ jobs:
       - name: Python 3.1 버전 설치
         uses: actions/setup-python@v4
         with:
-          python-version: '3.1'
+          python-version: '3.11.2'
 
       - name: 의존성 설치
         run: |
