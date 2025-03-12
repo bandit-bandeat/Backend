@@ -1,0 +1,72 @@
+name: changeService CI/CD
+
+on:
+  push:
+    branches:
+      - changeService
+  pull_request:
+    branches:
+      - changeService
+
+jobs:
+  # 잡 전체에 대한 이름 (custom 가능)
+  gateway-CICD:
+    # ubuntu linux 준비 -> 해장 작업이 진행되는 베이스 OS 지정
+    runs-on: ubuntu-latest
+    # 개별 작업 단계 지정
+    steps:
+      - name: Github Repository 내 파일들 checkout(불러오기) 수행
+        uses: actions/checkout@v4
+
+      - name: Python 3.1 버전 설치
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.1'
+
+      - name: 의존성 설치
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
+          python --version
+          pip --version
+
+      - name: .env 파일 동적 생성
+        run: |
+          echo "${{ secrets.CHANGE_SERVICE_ENV }}" > ./.env
+          ls
+
+      - name: 단위 테스트 및 빌드
+        run: |
+          source venv/bin/activate
+          pytest
+          ls
+
+      - name: 관리상 빌드된 결과물의 이름을 변경 처리
+        run: |
+          mv ./dist/*SNAPSHOT.tar.gz ./run.tar.gz
+          ls
+
+      - name: EC2에 파일 업로드
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.CHANGE_SERVICE_EC2_HOST }}
+          username: ${{ secrets.CHANGE_SERVICE_EC2_USER }}
+          key: ${{ secrets.CHANGE_SERVICE_EC2_KEY }}
+          source: run.tar.gz
+          target: /home/ubuntu/changeService/demo
+
+      - name: SSH로 ec2에 접속 후, 서버 가동
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.MYPAGESERVICE_EC2_HOST }}
+          username: ${{ secrets.MYPAGESERVICE_EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          script_stop: true
+          script: |
+            ls -l /home/ubuntu/changeService/demo
+            mv /home/ubuntu/changeService/demo/run.tar.gz /home/ubuntu/changeService/run.tar.gz
+            cd /home/ubuntu/changeService
+            fuser -k -n tcp 5000 || true
+            nohup python3 app.py > ./output.log 2>&1 &
+            rm -rf /home/ubuntu/changeService/demo
