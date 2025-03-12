@@ -1,5 +1,6 @@
 package com.example.gateway;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -12,6 +13,8 @@ import org.springframework.context.annotation.Bean;
 @EnableDiscoveryClient
 public class GatewayApplication {
 
+    @Value("${gateway.code_change}")
+    private String codeChange;
     public static void main(String[] args) {
         SpringApplication.run(GatewayApplication.class, args);
     }
@@ -22,6 +25,8 @@ public class GatewayApplication {
                 // 서비스별 URL 별칭이 1개인 경우, n개인 경우도 존재
                 .route("user",
                         r -> r.path("/auth/**").uri("lb://user"))
+                .route("code_change",
+                        r-> r.path("/code_change").uri(codeChange))
                 .build();
     }
 }
