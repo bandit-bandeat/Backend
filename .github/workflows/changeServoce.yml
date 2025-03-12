@@ -39,8 +39,9 @@ jobs:
       - name: 빌드
         run: |
           source venv/bin/activate
-          pytest
+          python -m build
           ls
+
 
       - name: 관리상 빌드된 결과물의 이름을 변경 처리
         run: |
