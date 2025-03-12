@@ -23,6 +23,10 @@ jobs:
           echo "${{ secrets.CHANGE_SERVICE_ENV }}" > ./.env
           ls
 
+      - name: 대기 시간 추가
+        run: |
+          sleep 5
+
       - name: 파일 압축
         run: |
           tar --exclude='./.git' --exclude='./data' -czvf run.tar.gz ./
