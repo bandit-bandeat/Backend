@@ -20,8 +20,8 @@ public class GatewayApplication {
         return builder.routes()
                 // 개별 라우트 등록
                 // 서비스별 URL 별칭이 1개인 경우, n개인 경우도 존재
-                .route("auth",
-                        r -> r.path("/auth/**").uri("lb://auth"))
+                .route("user",
+                        r -> r.path("/auth/**").uri("lb://user"))
                 .build();
     }
 }
