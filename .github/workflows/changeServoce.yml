@@ -62,9 +62,9 @@ jobs:
       - name: SSH로 ec2에 접속 후, 서버 가동
         uses: appleboy/ssh-action@v1.2.0
         with:
-          host: ${{ secrets.MYPAGESERVICE_EC2_HOST }}
-          username: ${{ secrets.MYPAGESERVICE_EC2_USER }}
-          key: ${{ secrets.EC2_KEY }}
+          host: ${{ secrets.CHANGE_SERVICE_EC2_HOST }}
+          username: ${{ secrets.CHANGE_SERVICE_EC2_USER }}
+          key: ${{ secrets.CHANGE_SERVICE_EC2_KEY }}
           script_stop: true
           script: |
             ls -l /home/ubuntu/changeService/demo
