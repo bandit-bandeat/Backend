@@ -46,7 +46,8 @@ jobs:
 
       - name: 관리상 빌드된 결과물의 이름을 변경 처리
         run: |
-          mv ./dist/*SNAPSHOT.tar.gz ./run.tar.gz
+          ls
+          mv ./dist/*.tar.gz ./run.tar.gz
           ls
 
       - name: EC2에 파일 업로드
