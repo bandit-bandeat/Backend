@@ -30,7 +30,7 @@ jobs:
 
       - name: 파일 압축
         run: |
-          tar -czvf run.tar.gz ./
+          tar --exclude='./.git' -czvf run.tar.gz ./
           ls
 
       - name: EC2에 파일 업로드
