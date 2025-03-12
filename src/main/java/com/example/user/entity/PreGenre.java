@@ -8,7 +8,7 @@ import lombok.Data;
 @Table(name = "preGenre")
 public class PreGenre {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String email;
     private long genreId;

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,7 +23,7 @@ public class AuthController {
 
     @PostMapping("/join")
     public ResponseEntity<?> join (String email, String password, String nickname, String birth,
-                                   List<String> preGenres) {
+                                   @RequestParam List<String> preGenres) {
         return authService.join(email,password,nickname,birth,preGenres);
     }
 
@@ -37,7 +38,8 @@ public class AuthController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity<?> update (@RequestHeader("Authorization") String token, String nickname, String birth, List<String> preGenres) {
+    public ResponseEntity<?> update (@RequestHeader("Authorization") String token, String nickname, String birth,
+                                     @RequestParam List<String> preGenres) {
         return authService.update(token,nickname,birth,preGenres);
     }
 
