@@ -29,7 +29,10 @@ jobs:
 
       - name: 파일 압축
         run: |
+          echo "압축 시작..."
+          ls
           tar --exclude='./.git' --exclude='./data' --ignore-failed-read -czvf run.tar.gz ./
+          echo "압축 완료..."
           ls
 
       - name: EC2에 파일 업로드
@@ -54,8 +57,9 @@ jobs:
             cd /home/ubuntu/changeService
             fuser -k -n tcp 5000 || true
             tar -xzvf run.tar.gz
+            deactivate
             python3 -m venv venv
             source venv/bin/activate
-            pip install .
+            pip install -r requirements.txt
             nohup python3 run.tar.gz > ./output.log 2>&1 &
             rm -rf /home/ubuntu/changeService/demo
