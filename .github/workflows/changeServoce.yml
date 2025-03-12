@@ -54,7 +54,6 @@ jobs:
             cd /home/ubuntu/changeService
             fuser -k -n tcp 5000 || true
             tar -xzvf run.tar.gz
-            cd change_service-1.0.0
             python3 -m venv venv
             source venv/bin/activate
             pip install .
