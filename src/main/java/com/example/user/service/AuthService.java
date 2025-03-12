@@ -50,6 +50,7 @@ public class AuthService {
         userDto.setEmail(email);
         userDto.setBirth(user.getBirth());
         userDto.setRole(user.getRole());
+        userDto.setNickname(user.getNickname());
 
         List<String> preGenre = genreRepository.findByEmail(email);
 
@@ -145,8 +146,8 @@ public class AuthService {
         User user = userRepository.findById(email).orElse(null);
         if(user == null) return ResponseEntity.badRequest().body("옳바르지 않은 ID");
 
-        if(!nickname.isEmpty()) user.setNickname(nickname);
-        if(!birth.isEmpty()) user.setBirth(birth);
+        if(nickname != null) user.setNickname(nickname);
+        if(birth != null) user.setBirth(birth);
         userRepository.save(user);
 
         preGenreRepository.deleteByEmail(email);
