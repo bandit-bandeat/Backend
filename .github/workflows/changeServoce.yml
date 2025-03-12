@@ -29,7 +29,7 @@ jobs:
 
       - name: 파일 압축
         run: |
-          tar --exclude='./.git' --exclude='./data' -czvf run.tar.gz ./
+          tar --exclude='./.git' --exclude='./data' --ignore-failed-read -czvf run.tar.gz ./
           ls
 
       - name: EC2에 파일 업로드
