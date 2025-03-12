@@ -18,11 +18,6 @@ jobs:
       - name: Github Repository 내 파일들 checkout(불러오기) 수행
         uses: actions/checkout@v4
 
-      - name: Python 3.11.2 버전 설치
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11.2'
-
       - name: .env 파일 동적 생성
         run: |
           echo "${{ secrets.CHANGE_SERVICE_ENV }}" > ./.env
@@ -30,7 +25,7 @@ jobs:
 
       - name: 파일 압축
         run: |
-          tar --exclude='./.git' -czvf run.tar.gz ./
+          tar --exclude='./.git' --exclude='./data' -czvf run.tar.gz ./
           ls
 
       - name: EC2에 파일 업로드
