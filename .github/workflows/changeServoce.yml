@@ -36,7 +36,7 @@ jobs:
           echo "${{ secrets.CHANGE_SERVICE_ENV }}" > ./.env
           ls
 
-      - name: 단위 테스트 및 빌드
+      - name: 빌드
         run: |
           source venv/bin/activate
           pytest

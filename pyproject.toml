@@ -1,0 +1,7 @@
+[build-system]
+requires = ["setuptools", "wheel"]  # 빌드에 필요한 패키지
+build-backend = "setuptools.build_meta"  # 빌드 시스템 백엔드 설정
+
+[tool.setuptools]
+name = "change_service"  # 프로젝트 이름
+version = "1.0.0"  # 프로젝트 버전
