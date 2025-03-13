@@ -13,10 +13,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install Python
+      - name: Install Python3
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'  # Python 버전 설정
+          python-version: '3.12.3'  # Python 버전 설정
 
       - name: Install Dependencies
         run: |
