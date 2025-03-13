@@ -1,10 +1,12 @@
 package com.example.user.service;
 
 import com.example.user.dto.UserDto;
+import com.example.user.entity.Change;
 import com.example.user.entity.Genre;
 import com.example.user.entity.PreGenre;
 import com.example.user.entity.User;
 import com.example.user.jwt.JwtUtil;
+import com.example.user.repository.ChangeRepository;
 import com.example.user.repository.GenreRepository;
 import com.example.user.repository.PreGenreRepository;
 import com.example.user.repository.UserRepository;
@@ -29,6 +31,7 @@ public class AuthService {
     private final RefreshService refreshService;
     private final GenreRepository genreRepository;
     private final PreGenreRepository preGenreRepository;
+    private final ChangeRepository changeRepository;
 
     public ResponseEntity<?> login(String email, String password, HttpServletResponse res) {
         User user = userRepository.findById(email).orElse(null);
@@ -80,6 +83,11 @@ public class AuthService {
         user.setRole("ROLE_USER");
 
         userRepository.save(user);
+
+        Change change = new Change();
+        change.setCnt(0);
+        change.setEmail(user.getEmail());
+        changeRepository.save(change);
 
         for(String preGenre : preGenres){
             Genre genre = genreRepository.findByGenre(preGenre);
