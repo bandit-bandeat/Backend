@@ -48,5 +48,9 @@ public class AuthController {
         return authService.delete(token, email);
     }
 
+    @PostMapping("/membership")
+    public ResponseEntity<?> membership (@RequestHeader("Authorization") String token) {
+        return authService.membership(token);
+    }
 
 }

@@ -1,15 +1,12 @@
 package com.example.user.service;
 
 import com.example.user.dto.UserDto;
-import com.example.user.entity.AiChange;
+import com.example.user.entity.AiTable;
 import com.example.user.entity.Genre;
 import com.example.user.entity.PreGenre;
 import com.example.user.entity.User;
 import com.example.user.jwt.JwtUtil;
-import com.example.user.repository.AiChangeRepository;
-import com.example.user.repository.GenreRepository;
-import com.example.user.repository.PreGenreRepository;
-import com.example.user.repository.UserRepository;
+import com.example.user.repository.*;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -31,7 +28,8 @@ public class AuthService {
     private final RefreshService refreshService;
     private final GenreRepository genreRepository;
     private final PreGenreRepository preGenreRepository;
-    private final AiChangeRepository aiChangeRepository;
+    private final AiTableRepository aiTableRepository;
+
 
     public ResponseEntity<?> login(String email, String password, HttpServletResponse res) {
         User user = userRepository.findById(email).orElse(null);
@@ -84,11 +82,10 @@ public class AuthService {
 
         userRepository.save(user);
 
-        AiChange change = new AiChange();
-        change.setCnt(0);
+        AiTable change = new AiTable();
         change.setEmail(user.getEmail());
 
-        aiChangeRepository.save(change);
+        aiTableRepository.save(change);
 
         for(String preGenre : preGenres){
             Genre genre = genreRepository.findByGenre(preGenre);
@@ -188,5 +185,22 @@ public class AuthService {
             return ResponseEntity.badRequest().body("탈퇴는 본인 혹은 관리자만 가능");
         userRepository.deleteById(email);
         return ResponseEntity.ok("탈퇴 성공");
+    }
+
+    public ResponseEntity<?> membership(String token) {
+        String email = "";
+        try{
+            jwtUtil.isExpired(token);
+            email = jwtUtil.getEmail(token);
+        }catch(Exception e){
+            return ResponseEntity.badRequest().body("유효하지 않은 액세스 토큰");
+        }
+
+        User user = userRepository.findById(email).orElse(null);
+        if(user == null) return ResponseEntity.badRequest().body("존재하지 않는 유저");
+
+        user.setMembership(1);
+        userRepository.save(user);
+        return ResponseEntity.ok("멤버쉽 가입 성공");
     }
 }
