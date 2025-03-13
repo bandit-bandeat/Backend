@@ -18,6 +18,7 @@ public class ChatController {
     // chat/pub/send
     @MessageMapping("/send")
     public void sendMessage(@Payload ChatDto chatDto) {
+        System.out.println(chatDto);
         chatService.sendMessage(chatDto.getREmail(), chatDto.getSEmail(), chatDto.getContent());
     }
 
