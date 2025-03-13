@@ -32,7 +32,7 @@ public class GatewayApplication {
                         r -> r.path("/comment/**").uri("lb://post"))
 
                 .route("change",
-                        r-> r.path("/change").uri(codeChange))
+                        r-> r.path("/change/**").uri(codeChange))
                 .build();
     }
 }
