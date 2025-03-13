@@ -25,8 +25,14 @@ public class GatewayApplication {
                 // 서비스별 URL 별칭이 1개인 경우, n개인 경우도 존재
                 .route("user",
                         r -> r.path("/auth/**").uri("lb://user"))
-                .route("code_change",
-                        r-> r.path("/code_change").uri(codeChange))
+
+                .route("post",
+                        r -> r.path("/post/**").uri("lb://post"))
+                .route("post",
+                        r -> r.path("/comment/**").uri("lb://post"))
+
+                .route("change",
+                        r-> r.path("/change").uri(codeChange))
                 .build();
     }
 }
