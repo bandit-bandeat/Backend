@@ -87,6 +87,7 @@ public class AuthService {
         AiChange change = new AiChange();
         change.setCnt(0);
         change.setEmail(user.getEmail());
+
         aiChangeRepository.save(change);
 
         for(String preGenre : preGenres){
