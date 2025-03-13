@@ -203,4 +203,9 @@ public class AuthService {
         userRepository.save(user);
         return ResponseEntity.ok("멤버쉽 가입 성공");
     }
+
+    public ResponseEntity<?> all() {
+        List<User> user = userRepository.findAll();
+        return ResponseEntity.ok(user);
+    }
 }

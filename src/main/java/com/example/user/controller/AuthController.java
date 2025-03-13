@@ -52,4 +52,10 @@ public class AuthController {
         return authService.membership(token);
     }
 
+    // 테스트용 지우셈
+    @GetMapping("/all")
+    public ResponseEntity<?> all () {
+        return authService.all();
+    }
+
 }
