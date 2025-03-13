@@ -15,6 +15,10 @@ public class GatewayApplication {
 
     @Value("${gateway.code_change}")
     private String codeChange;
+
+    @Value("${gateway.image_create}")
+    private String imageCreate;
+
     public static void main(String[] args) {
         SpringApplication.run(GatewayApplication.class, args);
     }
@@ -36,6 +40,9 @@ public class GatewayApplication {
 
                 .route("change",
                         r-> r.path("/change/**").uri(codeChange))
+
+                .route("change",
+                        r-> r.path("/generatelogo/**").uri(imageCreate))
                 .build();
     }
 }
