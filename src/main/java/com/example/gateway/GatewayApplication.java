@@ -30,6 +30,9 @@ public class GatewayApplication {
                         r -> r.path("/post/**").uri("lb://post"))
                 .route("post",
                         r -> r.path("/comment/**").uri("lb://post"))
+                .route("post",
+                        r -> r.path("/music/**").uri("lb://post"))
+
 
                 .route("change",
                         r-> r.path("/change/**").uri(codeChange))
