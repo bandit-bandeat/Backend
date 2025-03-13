@@ -5,6 +5,8 @@ import com.example.user.entity.Chat;
 import com.example.user.entity.User;
 import com.example.user.repository.ChatRepository;
 import com.example.user.repository.UserRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +27,7 @@ public class ChatService {
         User rUser = userRepository.findById(rEmail).orElse(null);
         User sUser = userRepository.findById(sEmail).orElse(null);
 
-        if(rUser == null || sUser == null) return;
+        if (rUser == null || sUser == null) return;
 
         Chat chat = new Chat();
         chat.setREmail(rEmail);
@@ -32,7 +35,18 @@ public class ChatService {
         chat.setContent(content);
 
         chatRepository.save(chat);
-        messagingTemplate.convertAndSend("/chat/sub/" + rEmail,"송신자 : " + sEmail + " 메세지 : " + content); // 수신자 이메일에 전송
+
+        ChatDto chatDto = new ChatDto();
+        chatDto.setREmail(rEmail);
+        chatDto.setSEmail(sEmail);
+        chatDto.setContent(content);
+        chatDto.setId(chat.getId());
+        chatDto.setCreated(chat.getCreated());
+
+
+        messagingTemplate.convertAndSend("/chat/sub/" + rEmail,"알림: 채팅, " + chatDto); // 수신자 이메일에 전송
+
+
     }
 
     public ResponseEntity<?> getChatHistory(String rEmail, String sEmail) {
