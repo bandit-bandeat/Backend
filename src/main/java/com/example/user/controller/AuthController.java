@@ -47,4 +47,6 @@ public class AuthController {
     public ResponseEntity<?> delete (@RequestHeader("Authorization") String token,String email) {
         return authService.delete(token, email);
     }
+
+
 }

@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="change")
-public class Change {
+@Table(name="ai_change")
+public class AiChange {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
