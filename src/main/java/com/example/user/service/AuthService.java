@@ -51,6 +51,7 @@ public class AuthService {
         userDto.setBirth(user.getBirth());
         userDto.setRole(user.getRole());
         userDto.setNickname(user.getNickname());
+        userDto.setMembership(user.getMembership());
 
         List<String> preGenre = genreRepository.findByEmail(email);
 
@@ -174,7 +175,7 @@ public class AuthService {
             return ResponseEntity.badRequest().body("옳바르지 않은 액세스 토큰");
         }
 
-        if(!temail.equals(email) && !role.equals("ADMIN"))
+        if(!temail.equals(email) && !role.equals("ROLE_ADMIN"))
             return ResponseEntity.badRequest().body("탈퇴는 본인 혹은 관리자만 가능");
         userRepository.deleteById(email);
         return ResponseEntity.ok("탈퇴 성공");

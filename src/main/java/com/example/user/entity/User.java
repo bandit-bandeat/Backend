@@ -20,6 +20,7 @@ public class User implements UserDetails {
     private String nickname;
     private String birth;
     private String role;
+    private int membership;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
