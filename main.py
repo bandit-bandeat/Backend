@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, Blueprint
+from flask import Flask, jsonify, request, Blueprint, abort
 from dotenv import load_dotenv
 import os
 import eureka_client
@@ -46,7 +46,7 @@ def music_change():
     style = request.form['style']
     print(type(music_file))
 
-    print(music_changer.changer(music_file))
+    #print(music_changer.changer(music_file))
     print(style)
     return "good"
 
@@ -63,7 +63,7 @@ def code_change():
         print(response)
         answer = str(response)
         return jsonify({"answer": answer})
-    return "노노"
+    return jsonify({"error": "하루 질문량을 초과했습니다."}), 400
 
 app.register_blueprint(change)
 
@@ -72,6 +72,6 @@ if __name__ == '__main__':
     eureka_client.register_service()
     print("플라스크 실행")
     #app.run(debug=False)
-    app.run(host='0.0.0.0', port=5000, debug = False)
+    app.run(host='0.0.0.0', port=5000, debug = True)
 
 
