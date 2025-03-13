@@ -63,5 +63,6 @@ jobs:
             deactivate
             source venv/bin/activate
             pip install -r requirements.txt
+            pip install pydub imageio[ffmpeg]
             nohup python3 main.py > ./output.log 2>&1 &
             rm -rf /home/ubuntu/changeService/demo
