@@ -50,10 +50,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     // jpa
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    //카프카
+    // 카프카
     implementation 'org.apache.kafka:kafka-streams'
     implementation 'org.springframework.kafka:spring-kafka'
     testImplementation 'org.springframework.kafka:spring-kafka-test'
+
 
 }
 dependencyManagement {
