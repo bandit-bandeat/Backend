@@ -2,6 +2,7 @@ import os
 import openai
 import boto3
 import requests
+import eureka_client
 from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
 from dotenv import load_dotenv
@@ -107,5 +108,8 @@ def generatelogo():
     }), 200
 
 if __name__ == '__main__':
+    print("유레카 연결")
+    eureka_client.register_service()
     print("플라스크 실행")
-    app.run(host='0.0.0.0', port=8080, debug=False)
+    #app.run(debug=False)
+    app.run(host='0.0.0.0', port=5000, debug = False)

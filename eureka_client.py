@@ -3,10 +3,10 @@ import requests
 import json
 
 def register_service():
-    # Eureka 서버 URL 설정
+ 
     EUREKA_SERVER_URL = os.getenv("EUREKA_SERVER_URL", "http://18.139.20.145:8761/eureka/apps/")
 
-    # Flask 애플리케이션 서비스 정보 설정
+   
     service_name = "changeService"
     app_id = "flask-app-id"
     instance_id = f"{service_name}-{os.getpid()}"
@@ -14,7 +14,7 @@ def register_service():
     port = 8080
     vip_address = "flask-service"
 
-    # 서비스 등록 정보
+  
     payload = {
         "instance": {
             "instanceId": instance_id,
@@ -37,7 +37,6 @@ def register_service():
         }
     }
 
-    # Eureka에 서비스 등록 요청
     response = requests.post(
         EUREKA_SERVER_URL + service_name,
         headers={"Content-Type": "application/json"},
