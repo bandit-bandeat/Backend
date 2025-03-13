@@ -7,7 +7,7 @@ from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
 from dotenv import load_dotenv
 
-# 환경 변수 로드
+# 환경 변수 로드sadadasd
 load_dotenv()
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
