@@ -23,7 +23,7 @@ jobs:
           python -m venv venv
           source venv/bin/activate
           pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install flask requests pandas
 
       - name: Upload Files to EC2
         uses: appleboy/scp-action@v0.1.7
