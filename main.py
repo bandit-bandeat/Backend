@@ -1,11 +1,11 @@
-from flask import Flask, jsonify, request, render_template, Blueprint
+from flask import Flask, jsonify, request, Blueprint
 from dotenv import load_dotenv
 import os
 import eureka_client
+from models import db, is_change_able
 
 import openai
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
-from llama_index.core import Document
 from llama_index.core import GPTVectorStoreIndex
 from llama_index.core import Settings
 from llama_index.llms.openai import OpenAI
@@ -16,6 +16,13 @@ app = Flask(__name__)
 
 load_dotenv()
 
+ROOT = os.getenv('DB_ROOT')
+PASSWORD = os.getenv('DB_PASSWORD')
+URL = os.getenv('DB_URL')
+
+print(ROOT, PASSWORD, URL)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{ROOT}:{PASSWORD}@{URL}'
 app.config['KEY'] = os.getenv('OPEN_AI_KEY')
 openai.api_key = app.config['KEY']
 
@@ -27,8 +34,13 @@ documents = SimpleDirectoryReader('./data').load_data()
 index = GPTVectorStoreIndex(documents)
 query_engin = index.as_query_engine()
 
+
+# db 테이블 연결
+db.init_app(app)
 # 라우팅
 change = Blueprint('change', __name__, url_prefix='/change')
+
+
 @change.route('/music', methods=['POST'])
 def music_change():
     music_file = request.files['music_file']
@@ -42,14 +54,17 @@ def music_change():
 @change.route('/code', methods=['POST'])
 def code_change():
     question = request.json.get('question')
-    print(question)
-    question = f'대답은 한글로 해줘\n{question}\n 기존 코드랑 바뀐 코드도 보여줘'
-    print(question)
-    response = query_engin.query(question)
-    print(response)
-
-    answer = str(response)
-    return jsonify( { "answer":answer } )
+    email = request.json.get('email')
+    print(email)
+    if is_change_able(email):
+        print("질문 가능합니다")
+        question = f'대답은 한글로 해줘\n{question}\n 기존 코드랑 바뀐 코드도 보여줘'
+        print(question)
+        response = query_engin.query(question)
+        print(response)
+        answer = str(response)
+        return jsonify({"answer": answer})
+    return "노노"
 
 app.register_blueprint(change)
 

@@ -23,7 +23,8 @@
         ✔ Flask request.files['music_file'] 활용
       
         ✅ MP3 → MIDI 변환
-        ✔ pydub으로 WAV 변환 후 basic-pitch로 MIDI 추출
+        ✔ librosa + pretty_midi
+        Basic Pitch (Spotify)
       
         ✅ MIDI → 텍스트 변환 후 GPT 스타일 변경
         ✔ pretty_midi로 MIDI 분석, GPT-4 API 활용

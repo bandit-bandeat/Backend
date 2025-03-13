@@ -1,7 +1,15 @@
+import os
+
 from pydub import AudioSegment
 from pydub.utils import which
 import subprocess
+import tempfile
 import io
+
+# import tensorflow as tf
+# import magenta
+# from magenta.models.onsets_frames_transcription import onsets_frames_predictor
+# from magenta.models.onsets_frames_transcription import ONSETS_FRAMES_CONFIG
 
 # 시스템에서 FFmpeg과 FFprobe 자동 경로 설정
 ffmpeg_path = which("ffmpeg")
@@ -22,5 +30,14 @@ def changer( music_file ):
     # BytesIO 객체를 'asd'와 같은 변수로 사용할 수 있음
     wav_bytes.seek(0)
 
-    return wav_bytes
+    # 임시 WAV 파일을 생성
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp_wav:
+        tmp_wav.write(wav_bytes.getvalue())
+        wav_path = tmp_wav.name  # 임시 파일 경로
+
+
+    # 임시 파일 삭제
+    os.remove(wav_path)
+
+    return "Asd"
 
