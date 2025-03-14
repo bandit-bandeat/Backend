@@ -77,8 +77,9 @@ jobs:
             source venv/bin/activate
             pip install --upgrade pip
 
-            # requirements.txt에서 cloud-init 제거
+            # requirements.txt에서 cloud-init과 command-not-found 제거
             sed -i '/cloud-init==24.4/d' requirements.txt  # cloud-init 제거
+            sed -i '/command-not-found==0.3/d' requirements.txt  # command-not-found 제거
             pip install -r requirements.txt  # requirements.txt 설치
 
             echo "✅ 서버 실행"
