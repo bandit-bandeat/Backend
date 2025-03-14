@@ -3,11 +3,14 @@ import openai
 import boto3
 import requests
 import eureka_client
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify, request, Blueprint, abort
 from werkzeug.utils import secure_filename
 from dotenv import load_dotenv
 
-# 환경 변수 로드sadadasd
+from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, GPTVectorStoreIndex, Settings
+from llama_index.llms.openai import OpenAI
+
+# 환경 변수 로드
 load_dotenv()
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -20,13 +23,24 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
+# AWS S3 클라이언트 설정
 s3_client = boto3.client(
     's3',
     aws_access_key_id=AWS_ACCESS_KEY,
     aws_secret_access_key=AWS_SECRET_KEY,
-    region_name='ap-northeast-3' 
+    region_name='ap-northeast-3'  # AWS 리전은 환경에 맞게 설정
 )
 
+# llama_index 설정
+openai_api_key = os.getenv("OPENAI_API_KEY")
+llm = OpenAI(model="gpt-4o-mini", temperature=0.7, api_key=openai_api_key)
+Settings.llm = llm
+
+documents = SimpleDirectoryReader('./data').load_data()
+index = GPTVectorStoreIndex(documents)
+query_engine = index.as_query_engine()
+
+# 로고 이름 생성 함수
 def generate_logo_name(lyrics):
     try:
         response = openai.ChatCompletion.create(
@@ -41,6 +55,7 @@ def generate_logo_name(lyrics):
         print(f"Error generating logo name: {e}")
         return "default_logo"
 
+# 이미지 생성 함수
 def generate_image(prompt):
     try:
         response = openai.Image.create(
@@ -55,6 +70,7 @@ def generate_image(prompt):
         print(f"Error generating image: {e}")
         return None
 
+# 이미지 다운로드 함수
 def download_image(image_url, filename):
     try:
         response = requests.get(image_url)
@@ -67,6 +83,7 @@ def download_image(image_url, filename):
         print(f"Error downloading image: {e}")
         return None
 
+# S3에 업로드 함수
 def upload_to_s3(file_path, bucket_name, object_name):
     try:
         s3_client.upload_file(file_path, bucket_name, object_name)
@@ -75,6 +92,24 @@ def upload_to_s3(file_path, bucket_name, object_name):
         print(f"Error uploading to S3: {e}")
         return None
 
+# 쿼리 엔진을 사용하여 질문 처리하는 엔드포인트
+@app.route('/query', methods=['POST'])
+def process_query():
+    data = request.get_json()
+    question = data.get('question')
+
+    if not question:
+        return jsonify({"error": "질문이 필요합니다."}), 400
+    
+    try:
+        response = query_engine.query(question)
+        answer = str(response)
+        return jsonify({"answer": answer}), 200
+    except Exception as e:
+        print(f"Error processing query: {e}")
+        return jsonify({"error": "쿼리 처리 중 오류 발생"}), 500
+
+# 로고 생성 API 엔드포인트
 @app.route('/generatelogo', methods=['POST'])
 def generatelogo():
     data = request.get_json()
@@ -112,4 +147,4 @@ if __name__ == '__main__':
     eureka_client.register_service()
     print("플라스크 실행")
     #app.run(debug=False)
-    app.run(host='0.0.0.0', port=8080, debug = False)
+    app.run(host='0.0.0.0', port=8080, debug=False)
