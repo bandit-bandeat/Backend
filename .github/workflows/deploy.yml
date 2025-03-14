@@ -22,7 +22,7 @@ jobs:
           echo "${{ secrets.CHANGE_SERVICE_ENV_IMAGE }}" > ./.env
           ls -a
 
-      # 대기 시간 추가ssss
+      # 대기 시간 추가sssss
       - name: 대기 시간 추가
         run: |
           sleep 5
