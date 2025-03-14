@@ -83,8 +83,8 @@ jobs:
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.CHANGE_SERVICE_EC2_HOST }}
-          username: ${{ secrets.EC2_USER_IMAGE }}
-          key: ${{ secrets.EC2_KEY_IMAGE }}
+          username: ${{ secrets.CHANGE_SERVICE_EC2_USER }}
+          key: ${{ secrets.CHANGE_SERVICE_EC2_KEY }}
           script_stop: true
           script: |
             cd /home/ubuntu/createImageService
