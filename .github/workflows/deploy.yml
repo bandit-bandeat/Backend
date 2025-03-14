@@ -12,17 +12,22 @@ jobs:
   gateway-CICD:
     runs-on: ubuntu-latest
     steps:
-      - name: Github Repository 내 파일들 checkout(불러오기)
+      # Github Repository 내 파일들 checkout(불러오기) 수행
+      - name: Github Repository 내 파일들 checkout(불러오기) 수행
         uses: actions/checkout@v4
 
+      # .env 파일 동적 생성
       - name: .env 파일 동적 생성
         run: |
           echo "${{ secrets.CHANGE_SERVICE_ENV_IMAGE }}" > ./.env
           ls -a
 
+      # 대기 시간 추가
       - name: 대기 시간 추가
-        run: sleep 5
+        run: |
+          sleep 5
 
+      # 파일 압축
       - name: 파일 압축
         run: |
           echo "압축 시작 전 파일 확인"
@@ -32,6 +37,7 @@ jobs:
           echo "압축 완료..."
           ls -a
 
+      # EC2에 파일 업로드
       - name: EC2에 파일 업로드
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -41,7 +47,8 @@ jobs:
           source: run.tar.gz
           target: /home/ubuntu/createImageService/demo
 
-      - name: SSH로 EC2에 접속 후, 서버 가동
+      # SSH로 ec2에 접속 후, 서버 가동
+      - name: SSH로 ec2에 접속 후, 서버 가동
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.EC2_HOST_IMAGE }}
@@ -56,7 +63,10 @@ jobs:
             mv /home/ubuntu/createImageService/demo/run.tar.gz /home/ubuntu/createImageService/run.tar.gz
             cd /home/ubuntu/createImageService
             tar -xzvf run.tar.gz
-            
+
+            echo "📂 압축 해제 후 파일 확인"
+            ls -a  # 압축 후 파일 목록을 출력하여 requirements.txt가 존재하는지 확인
+
             echo "🚀 기존 프로세스 종료 (8080 포트)"
             fuser -k -n tcp 8080 || true
 
@@ -66,7 +76,7 @@ jobs:
             python3 -m venv venv
             source venv/bin/activate
             pip install --upgrade pip
-            pip install -r requirements.txt
+            pip install -r requirements.txt  # requirements.txt 설치
 
             echo "✅ 서버 실행"
             nohup python3 main.py > ./output.log 2>&1 &
