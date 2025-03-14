@@ -72,6 +72,9 @@ jobs:
             source venv/bin/activate
             pip install --upgrade pip
 
+            # Cython 설치
+            pip install cython
+
             # requirements.txt에서 hibagent, cloud-init, command-not-found, distro-info, ec2-hibinit-agent 제거
             sed -i '/hibagent==1.0.1/d' requirements.txt  # hibagent 제거
             sed -i '/cloud-init==24.4/d' requirements.txt  # cloud-init 제거
