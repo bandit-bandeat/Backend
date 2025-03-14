@@ -47,6 +47,3 @@ def register_service():
         print(f"Service {service_name} registered successfully!")
     else:
         print(f"Failed to register service. Status code: {response.status_code}, {response.text}")
-
-if __name__ == "__main__":
-    register_service()
