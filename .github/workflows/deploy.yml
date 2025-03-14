@@ -3,7 +3,7 @@ name: Deploy Flask App and CI/CD for changeService
 on:
   push:
     branches:
-      - master  # 배포할 브랜치 지정
+      - createImageService  # 배포할 브랜치 지정
   pull_request:
     branches:
       - createImageService
@@ -40,9 +40,9 @@ jobs:
       - name: Upload Files to EC2
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_KEY }}
+          host: ${{ secrets.EC2_HOST_IMAGE }}
+          username: ${{ secrets.EC2_USER_IMAGE }}
+          key: ${{ secrets.EC2_KEY_IMAGE }}
           source: "."
           target: "/home/ubuntu/flask-app"
 
@@ -50,9 +50,9 @@ jobs:
       - name: Run Flask App on EC2
         uses: appleboy/ssh-action@v1.2.0
         with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_KEY }}
+          host: ${{ secrets.EC2_HOST_IMAGE }}
+          username: ${{ secrets.EC2_USER_IMAGE }}
+          key: ${{ secrets.EC2_KEY_IMAGE }}
           script: |
             cd /home/ubuntu/flask-app
             python3 -m venv venv
@@ -73,7 +73,7 @@ jobs:
       # .env 파일을 동적으로 생성합니다.
       - name: Create .env file
         run: |
-          echo "${{ secrets.CHANGE_SERVICE_ENV }}" > ./.env
+          echo "${{ secrets.CHANGE_SERVICE_ENV_IMAGE }}" > ./.env
           ls -a
 
       # 대기 시간 추가
@@ -96,8 +96,8 @@ jobs:
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST_IMAGE }}
-          username: ${{ secrets.CHANGE_SERVICE_EC2_USER }}
-          key: ${{ secrets.CHANGE_SERVICE_EC2_KEY }}
+          username: ${{ secrets.EC2_USER_IMAGE }}
+          key: ${{ secrets.EC2_KEY_IMAGE }}
           source: run.tar.gz
           target: /home/ubuntu/changeService/demo
 
@@ -106,8 +106,8 @@ jobs:
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.CHANGE_SERVICE_EC2_HOST }}
-          username: ${{ secrets.CHANGE_SERVICE_EC2_USER }}
-          key: ${{ secrets.CHANGE_SERVICE_EC2_KEY }}
+          username: ${{ secrets.EC2_USER_IMAGE }}
+          key: ${{ secrets.EC2_KEY_IMAGE }}
           script_stop: true
           script: |
             ls -l /home/ubuntu/changeService/demo
