@@ -71,7 +71,7 @@ jobs:
             fuser -k -n tcp 8080 || true
 
             echo "🐍 Python 및 가상 환경 준비"
-            sudo apt update && sudo apt install -y python3 python3-venv python3-pip bcc cloud-init
+            sudo apt update && sudo apt install -y python3 python3-venv python3-pip bcc dbus-1-dev pkg-config cmake
             rm -rf venv
             python3 -m venv venv
             source venv/bin/activate
