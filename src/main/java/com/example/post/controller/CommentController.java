@@ -1,6 +1,7 @@
 package com.example.post.controller;
 
 import com.example.post.service.CommentService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,7 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping("/write")
-    public ResponseEntity<?> write(@RequestHeader("Authorization") String token, long postId, String content) {
+    public ResponseEntity<?> write(@RequestHeader("Authorization") String token, long postId, String content) throws JsonProcessingException {
         return commentService.write(token,postId,content);
     }
 

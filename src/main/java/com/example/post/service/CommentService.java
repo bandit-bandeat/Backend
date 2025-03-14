@@ -1,5 +1,6 @@
 package com.example.post.service;
 
+import com.example.post.dto.KafkaCmtDto;
 import com.example.post.entity.Comment;
 import com.example.post.entity.CommentLike;
 import com.example.post.entity.Post;
@@ -9,9 +10,12 @@ import com.example.post.repository.CmtLikeRepository;
 import com.example.post.repository.CmtRepository;
 import com.example.post.repository.PostRepository;
 import com.example.post.repository.UserRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,11 +23,12 @@ import org.springframework.stereotype.Service;
 public class CommentService {
     private final CmtRepository cmtRepository;
     private final CmtLikeRepository cmtLikeRepository;
-    private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
     private final PostRepository postRepository;
+    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final ObjectMapper mapper;
 
-    public ResponseEntity<?> write(String token, long postId, String content) {
+    public ResponseEntity<?> write(String token, long postId, String content) throws JsonProcessingException {
         Post post = postRepository.findById(postId).orElse(null);
         if(post == null) return ResponseEntity.badRequest().body("존재하지 않는 게시글");
 
@@ -41,6 +46,14 @@ public class CommentService {
         comment.setEmail(email);
 
         cmtRepository.save(comment);
+
+        KafkaCmtDto kafkaCmtDto = new KafkaCmtDto();
+        kafkaCmtDto.setEmail(post.getEmail());
+        kafkaCmtDto.setPostId(postId);
+
+        kafkaTemplate.send("comment", mapper.writeValueAsString(kafkaCmtDto));
+        System.out.println("카프카 전송 완");
+
         return ResponseEntity.ok("댓글 작성 성공");
     }
 
