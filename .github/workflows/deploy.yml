@@ -56,7 +56,7 @@ jobs:
             ls -l /home/ubuntu/createImageService/demo
             mv /home/ubuntu/createImageService/demo/run.tar.gz /home/ubuntu/createImageService/run.tar.gz
             cd /home/ubuntu/createImageService
-            fuser -k -n tcp 5000 || true
+            fuser -k -n tcp 8080 || true
             tar -xzvf run.tar.gz
             python3 -m venv venv
             source venv/bin/activate
