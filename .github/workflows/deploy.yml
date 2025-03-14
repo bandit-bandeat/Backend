@@ -63,20 +63,20 @@ jobs:
             nohup python app.py > output.log 2>&1 &
 
       # 6️⃣ Gateway 파일 압축
-      - name: Compress files for Gateway
+      - name: Compress Gateway files
         run: |
-          tar --exclude='./.git' --ignore-failed-read -czvf run.tar.gz ./
+          tar --exclude='./.git' --ignore-failed-read -czvf gateway_run.tar.gz ./gateway
           ls -a
 
       # 7️⃣ Gateway 파일을 EC2에 업로드
-      - name: Upload compressed files to EC2
+      - name: Upload compressed Gateway files to EC2
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST_IMAGE }}
           username: ${{ secrets.EC2_USER_IMAGE }}
           key: ${{ secrets.EC2_KEY_IMAGE }}
-          source: run.tar.gz
-          target: /home/ubuntu/createImageService
+          source: gateway_run.tar.gz
+          target: /home/ubuntu/createImageService/demo
 
       # 8️⃣ Gateway 서비스 실행
       - name: Run Gateway Service on EC2
@@ -89,7 +89,7 @@ jobs:
           script: |
             cd /home/ubuntu/createImageService
             fuser -k -n tcp 5000 || true
-            tar -xzvf run.tar.gz
+            tar -xzvf demo/gateway_run.tar.gz
             python3 -m venv venv
             source venv/bin/activate
             pip install -r requirements.txt
