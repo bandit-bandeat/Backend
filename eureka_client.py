@@ -12,7 +12,7 @@ def register_service():
     app_id = "flask-app-id"
     instance_id = f"{service_name}-{os.getpid()}"  # 예시로 고유 ID 생성
     host_name = "localhost"  # Flask 서버가 동작하는 호스트
-    port = 5000  # Flask 서버 포트 맞게 수정
+    port = 8080  # Flask 서버 포트 맞게 수정
     vip_address = "flask-service"
 
     # 서비스 등록 정보
