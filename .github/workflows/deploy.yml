@@ -82,9 +82,9 @@ jobs:
       - name: Run Gateway Service on EC2
         uses: appleboy/ssh-action@v1.2.0
         with:
-          host: ${{ secrets.CHANGE_SERVICE_EC2_HOST }}
-          username: ${{ secrets.CHANGE_SERVICE_EC2_USER }}
-          key: ${{ secrets.CHANGE_SERVICE_EC2_KEY }}
+          host: ${{ secrets.EC2_HOST_IMAGE }}
+          username: ${{ secrets.EC2_USER_IMAGE }}
+          key: ${{ secrets.EC2_KEY_IMAGE }}
           script_stop: true
           script: |
             cd /home/ubuntu/createImageService
