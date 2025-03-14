@@ -1,3 +1,33 @@
-.env
-
+# 가상환경 디렉토리 (venv, .env 등)
 web/
+.env/
+
+# Python 바이트 코드 파일 (컴파일된 .pyc 파일)
+__pycache__/
+*.pyc
+
+# 가상환경을 위한 .env 파일
+*.env
+
+# 패키지 관리자 관련 파일
+*.pdb
+*.log
+
+# IDE/편집기 관련 파일 (VSCode, PyCharm 등)
+.vscode/
+.idea/
+
+# 테스트 결과, 로그 파일 등
+*.log
+test-results/
+
+# 빌드 디렉토리나 배포 파일
+dist/
+build/
+*.tar.gz
+*.egg
+*.whl
+
+# Windows 관련 파일
+Thumbs.db
+Desktop.ini
