@@ -1,85 +1,51 @@
-name: Deploy Flask App and Gateway CI/CD
+name: createImageService CI/CD
 
 on:
   push:
     branches:
-      - createImageService  # 배포할 브랜치 지정
+      - createImageService
   pull_request:
     branches:
       - createImageService
 
 jobs:
-  deploy:
+  # 잡 전체에 대한 이름 (custom 가능)
+  gateway-CICD:
+    # ubuntu linux 준비 -> 해장 작업이 진행되는 베이스 OS 지정
     runs-on: ubuntu-latest
-
+    # 개별 작업 단계 지정
     steps:
-      # 1️⃣ 리포지토리 체크아웃
-      - name: Checkout code
+      - name: Github Repository 내 파일들 checkout(불러오기) 수행
         uses: actions/checkout@v4
 
-      # 2️⃣ .env 파일 생성
-      - name: Create .env file
+      - name: .env 파일 동적 생성
         run: |
           echo "${{ secrets.CHANGE_SERVICE_ENV_IMAGE }}" > ./.env
           ls -a
 
-      # 3️⃣ Python3 및 의존성 설치
-      - name: Install Python3 and dependencies
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.12.3'
-
-      - name: Install Dependencies
+      - name: 대기 시간 추가
         run: |
-          python -m venv venv
-          source venv/bin/activate
-          pip install --upgrade pip
-          pip install flask requests pandas
+          sleep 5
 
-      # 4️⃣ Flask 앱 파일을 EC2에 업로드
-      - name: Upload Files to EC2
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.EC2_HOST_IMAGE }}
-          username: ${{ secrets.EC2_USER_IMAGE }}
-          key: ${{ secrets.EC2_KEY_IMAGE }}
-          source: "."
-          target: "/home/ubuntu/flask-app"
-
-      # 5️⃣ Flask 앱 실행
-      - name: Run Flask App on EC2
-        uses: appleboy/ssh-action@v1.2.0
-        with:
-          host: ${{ secrets.EC2_HOST_IMAGE }}
-          username: ${{ secrets.EC2_USER_IMAGE }}
-          key: ${{ secrets.EC2_KEY_IMAGE }}
-          script: |
-            cd /home/ubuntu/flask-app
-            python3 -m venv venv
-            source venv/bin/activate
-            pip install --upgrade pip
-            pip install -r requirements.txt
-            sudo fuser -k 5000/tcp || true
-            nohup python app.py > output.log 2>&1 &
-
-      # 6️⃣ Gateway 파일 압축
-      - name: Compress Gateway files
+      - name: 파일 압축
         run: |
-          tar --exclude='./.git' --ignore-failed-read -czvf gateway_run.tar.gz ./gateway
+          echo "압축 시작 전 파일 확인"
+          ls -a
+          echo "압축 시작"
+          tar --exclude='./.git' --ignore-failed-read -czvf run.tar.gz ./
+          echo "압축 완료..."
           ls -a
 
-      # 7️⃣ Gateway 파일을 EC2에 업로드
-      - name: Upload compressed Gateway files to EC2
+      - name: EC2에 파일 업로드
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST_IMAGE }}
           username: ${{ secrets.EC2_USER_IMAGE }}
           key: ${{ secrets.EC2_KEY_IMAGE }}
-          source: gateway_run.tar.gz
+          source: run.tar.gz
           target: /home/ubuntu/createImageService/demo
 
-      # 8️⃣ Gateway 서비스 실행
-      - name: Run Gateway Service on EC2
+      - name: SSH로 ec2에 접속 후, 서버 가동
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.EC2_HOST_IMAGE }}
@@ -87,11 +53,15 @@ jobs:
           key: ${{ secrets.EC2_KEY_IMAGE }}
           script_stop: true
           script: |
+            ls -l /home/ubuntu/createImageService/demo
+            mv /home/ubuntu/createImageService/demo/run.tar.gz /home/ubuntu/createImageService/run.tar.gz
             cd /home/ubuntu/createImageService
             fuser -k -n tcp 5000 || true
-            tar -xzvf demo/gateway_run.tar.gz
+            tar -xzvf run.tar.gz
             python3 -m venv venv
             source venv/bin/activate
+            deactivate
+            source venv/bin/activate
             pip install -r requirements.txt
-            nohup python3 main.py > output.log 2>&1 &
+            nohup python3 main.py > ./output.log 2>&1 &
             rm -rf /home/ubuntu/createImageService/demo
