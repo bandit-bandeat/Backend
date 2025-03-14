@@ -52,7 +52,6 @@ public class CommentService {
         kafkaCmtDto.setPostId(postId);
 
         kafkaTemplate.send("comment", mapper.writeValueAsString(kafkaCmtDto));
-        System.out.println("카프카 전송 완");
 
         return ResponseEntity.ok("댓글 작성 성공");
     }
