@@ -12,22 +12,18 @@ jobs:
   gateway-CICD:
     runs-on: ubuntu-latest
     steps:
-      # Github Repository 내 파일들 checkout(불러오기) 수행
       - name: Github Repository 내 파일들 checkout(불러오기) 수행
         uses: actions/checkout@v4
 
-      # .env 파일 동적 생성
       - name: .env 파일 동적 생성
         run: |
           echo "${{ secrets.CHANGE_SERVICE_ENV_IMAGE }}" > ./.env
           ls -a
 
-      # 대기 시간 추가
       - name: 대기 시간 추가
         run: |
           sleep 5
 
-      # 파일 압축
       - name: 파일 압축
         run: |
           echo "압축 시작 전 파일 확인"
@@ -37,7 +33,6 @@ jobs:
           echo "압축 완료..."
           ls -a
 
-      # EC2에 파일 업로드
       - name: EC2에 파일 업로드
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -47,7 +42,6 @@ jobs:
           source: run.tar.gz
           target: /home/ubuntu/createImageService/demo
 
-      # SSH로 ec2에 접속 후, 서버 가동
       - name: SSH로 ec2에 접속 후, 서버 가동
         uses: appleboy/ssh-action@v1.2.0
         with:
@@ -81,6 +75,7 @@ jobs:
             # requirements.txt에서 cloud-init과 command-not-found 제거
             sed -i '/cloud-init==24.4/d' requirements.txt  # cloud-init 제거
             sed -i '/command-not-found==0.3/d' requirements.txt  # command-not-found 제거
+            sed -i '/distro-info==1.7+build1/d' requirements.txt  # distro-info 제거
             pip install -r requirements.txt  # requirements.txt 설치
 
             echo "✅ 서버 실행"
