@@ -72,10 +72,11 @@ jobs:
             source venv/bin/activate
             pip install --upgrade pip
 
-            # requirements.txt에서 cloud-init과 command-not-found 제거
+            # requirements.txt에서 cloud-init, command-not-found, distro-info, ec2-hibinit-agent 제거
             sed -i '/cloud-init==24.4/d' requirements.txt  # cloud-init 제거
             sed -i '/command-not-found==0.3/d' requirements.txt  # command-not-found 제거
             sed -i '/distro-info==1.7+build1/d' requirements.txt  # distro-info 제거
+            sed -i '/ec2-hibinit-agent==1.0.0/d' requirements.txt  # ec2-hibinit-agent 제거
             pip install -r requirements.txt  # requirements.txt 설치
 
             echo "✅ 서버 실행"
