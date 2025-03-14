@@ -1,6 +1,7 @@
 package com.example.user.service;
 
 import com.example.user.dto.ChatDto;
+import com.example.user.dto.KafkaCmtDto;
 import com.example.user.entity.Chat;
 import com.example.user.entity.User;
 import com.example.user.repository.ChatRepository;
@@ -9,6 +10,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,20 @@ public class ChatService {
     private final ChatRepository chatRepository;
     private final UserRepository userRepository;
     private final SimpMessagingTemplate messagingTemplate;
+    private final ObjectMapper objectMapper;
+
+    @KafkaListener(topics = "comment", groupId = "team")
+    public void commentKafka(String message){
+        KafkaCmtDto kafkaCmtDto;
+        try{
+            kafkaCmtDto = objectMapper.readValue(message, KafkaCmtDto.class);
+            System.out.println("댓글 알림");
+        }catch (JsonProcessingException e){
+            e.printStackTrace();
+            return;
+        }
+        messagingTemplate.convertAndSend("/chat/sub/" + kafkaCmtDto.getEmail(), "알림: 댓글, " + kafkaCmtDto);
+    }
 
     public void sendMessage(String rEmail, String sEmail, String content) {
         User rUser = userRepository.findById(rEmail).orElse(null);
