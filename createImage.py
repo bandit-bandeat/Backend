@@ -59,7 +59,7 @@ def generate_logo_name(lyrics):
 def generate_image(prompt):
     try:
         response = openai.Image.create(
-            model="dall-e-3",  # 최신 모델 이름
+            model="dall-e-3",
             prompt=prompt,
             size="1024x1024",
             quality="standard",
@@ -69,11 +69,8 @@ def generate_image(prompt):
         if not image_url:
             raise ValueError("이미지 URL이 비어 있습니다.")
         return image_url
-    except openai.error.OpenAIError as e:
-        print(f"OpenAI API 오류: {e}")
-        return None
     except Exception as e:
-        print(f"이미지 생성 오류: {e}")
+        print(f"이미지 생성 오류: {e}")  # 예외 로그 출력
         return None
 
 
@@ -155,4 +152,4 @@ if __name__ == '__main__':
     eureka_client.register_service()
     print("플라스크 실행")
     #app.run(debug=False)
-    app.run(host='0.0.0.0', port=8080, debug=False)
+    app.run(host='0.0.0.0', port=8080, debug=True)
