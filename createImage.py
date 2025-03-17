@@ -65,6 +65,7 @@ def generate_image(prompt):
             quality="standard",
             n=1
         )
+        print("OpenAI API Response:", response)  # 응답 로그 출력
         image_url = response['data'][0]['url']
         if not image_url:
             raise ValueError("이미지 URL이 비어 있습니다.")
@@ -72,6 +73,7 @@ def generate_image(prompt):
     except Exception as e:
         print(f"이미지 생성 오류: {e}")  # 예외 로그 출력
         return None
+
 
 
 
