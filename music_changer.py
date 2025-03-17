@@ -132,6 +132,7 @@ def midi_to_mp3(midi_path):
     print("mp3 경로: ", output_mp3)
 
     try:
+        print("FluidSynth 실행 전")
         fs.midi_to_audio(midi_path, wav_path)
         print(f"WAV 변환 완료: {wav_path}")
 
