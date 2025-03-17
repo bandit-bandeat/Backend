@@ -122,7 +122,7 @@ def generatelogo():
     if not local_image_path:
         return jsonify({"error": "이미지 다운로드 실패"}), 500
 
-    # S3에 업로드
+    # S3에 업로드sss
     s3_url = upload_to_s3(local_image_path, AWS_BUCKET_NAME, image_filename)
 
     if not s3_url:
