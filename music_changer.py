@@ -3,6 +3,7 @@ import io
 import tempfile
 import subprocess
 from dotenv import load_dotenv
+import traceback
 
 from basic_pitch.inference import predict_and_save
 from basic_pitch import ICASSP_2022_MODEL_PATH
@@ -143,7 +144,7 @@ def midi_to_mp3(midi_path):
         return output_mp3
     except Exception as e:
         print(f"오류 발생: {e}")
-        return None
+        traceback.print_exc()
 
 def download_soundfont_from_s3():
     bucket_name = os.getenv("S3_BUCKET_NAME")
