@@ -9,7 +9,7 @@ on:
       - createImageService
 
 jobs:
-  # 잡 전체에 대한 이름 (custom 가능)
+  # 잡 전체에 대한 이름 (custom 가능)adsda
   gateway-CICD:
     # ubuntu linux 준비 -> 해장 작업이 진행되는 베이스 OS 지정
     runs-on: ubuntu-latest
