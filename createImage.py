@@ -3,12 +3,12 @@ import openai
 import boto3
 import requests
 import eureka_client
-from flask import Flask, request, jsonify,Blueprint
+from flask import Flask, request, jsonify, Blueprint
 from werkzeug.utils import secure_filename
 from dotenv import load_dotenv
-from model import db,is_change_able
+from model import db, is_change_able
 
-# 환경 변수 로드sadadasd
+# 환경 변수 로드
 load_dotenv()
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -26,11 +26,9 @@ print(ROOT, PASSWORD, URL)
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{ROOT}:{PASSWORD}@{URL}/{NAME}'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{ROOT}:{PASSWORD}@{URL}'
 app.config['KEY'] = os.getenv('OPENAI_API_KEY')
 openai.api_key = app.config['KEY']
-
-
 
 s3_client = boto3.client(
     's3',
@@ -43,20 +41,24 @@ db.init_app(app)
 # 라우팅
 change = Blueprint('create', __name__, url_prefix='/create')
 
+# 로고 이름을 짧게 생성하는 함수
 def generate_logo_name(lyrics):
     try:
         response = openai.ChatCompletion.create(
             model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": "You are an AI that generates creative brand names based on lyrics."},
-                {"role": "user", "content": f"Generate a short, catchy logo name in Korean based on these lyrics: {lyrics}"}
-            ]
+            messages=[{"role": "system", "content": "You are an AI that generates creative brand names based on lyrics."},
+                      {"role": "user", "content": f"Generate a short, 이 가사를 바탕으로 한 한국어 로고 이름: {lyrics}"}]
         )
-        return response["choices"][0]["message"]["content"].strip()
+        logo_name = response["choices"][0]["message"]["content"].strip()
+
+        # 로고 이름 길이를 최대 10자로 제한
+        short_logo_name = logo_name[:10]  # 예: 10자 이상은 자르기
+        return short_logo_name
     except Exception as e:
         print(f"Error generating logo name: {e}")
         return "default_logo"
 
+# 이미지 생성 함수
 def generate_image(prompt):
     try:
         response = openai.Image.create(
@@ -71,6 +73,7 @@ def generate_image(prompt):
         print(f"Error generating image: {e}")
         return None
 
+# 이미지 다운로드 함수
 def download_image(image_url, filename):
     try:
         response = requests.get(image_url)
@@ -83,6 +86,7 @@ def download_image(image_url, filename):
         print(f"Error downloading image: {e}")
         return None
 
+# S3에 업로드 함수
 def upload_to_s3(file_path, bucket_name, object_name):
     try:
         s3_client.upload_file(file_path, bucket_name, object_name)
@@ -129,8 +133,6 @@ def generatelogo():
         "logo_name": logo_name,
         "s3_url": s3_url
     }), 200
-
-
 
 if __name__ == '__main__':
     print("유레카 연결")
