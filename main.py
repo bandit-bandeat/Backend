@@ -105,7 +105,11 @@ def code_change():
     print(email)
     if is_change_able(email):
         print("질문 가능합니다")
-        question = f'대답은 한글로 해줘\n{question}\n 기존 코드랑 바뀐 코드도 보여줘'
+        question = (f'대답은 한글로 해줘\n{question}\n'
+                    f'답변 형식은 다음과 같이 해줘\n'
+                    f'기존 코드 진행 : ***\n'
+                    f'바꾼 코드 진행 : ***\n'
+                    f'이렇게 바꾼 이유: ***\n')
         print(question)
         response = query_engin.query(question)
         print(response)
