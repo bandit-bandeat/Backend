@@ -43,14 +43,13 @@ query_engine = index.as_query_engine()
 # 로고 이름 생성 함수
 def generate_logo_name(lyrics):
     try:
-        response = openai.ChatCompletion.create(
+        response = openai.completions.create(
             model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": "You are an AI that generates creative brand names based on lyrics."},
-                {"role": "user", "content": f"Generate a short, catchy logo name based on these lyrics: {lyrics}"}
-            ]
+            prompt=f"Generate a short, catchy logo name based on these lyrics: {lyrics}",
+            max_tokens=50,
+            temperature=0.7
         )
-        return response["choices"][0]["message"]["content"].strip()
+        return response["choices"][0]["text"].strip()
     except Exception as e:
         print(f"Error generating logo name: {e}")
         return "default_logo"
@@ -58,11 +57,10 @@ def generate_logo_name(lyrics):
 # 이미지 생성 함수
 def generate_image(prompt):
     try:
-        response = openai.Image.create(
+        response = openai.images.create(
             model="dall-e-3",
             prompt=prompt,
             size="1024x1024",
-            quality="standard",
             n=1
         )
         print("OpenAI API Response:", response)  # 응답 로그 출력
@@ -73,9 +71,6 @@ def generate_image(prompt):
     except Exception as e:
         print(f"이미지 생성 오류: {e}")  # 예외 로그 출력
         return None
-
-
-
 
 # 이미지 다운로드 함수
 def download_image(image_url, filename):
@@ -153,5 +148,4 @@ if __name__ == '__main__':
     print("유레카 연결")
     eureka_client.register_service()
     print("플라스크 실행")
-    #app.run(debug=False)
-    app.run(host='0.0.0.0', port=8080, debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=False)
