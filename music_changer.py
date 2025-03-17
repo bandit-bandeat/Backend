@@ -120,19 +120,29 @@ def text_to_midi(midi_text, base_name):
     return f'./temp_music/{base_name}.mid'
 
 def midi_to_mp3(midi_path):
+    print("midi_to_mp3 시작")
     soundfont_path = download_soundfont_from_s3()
     fs = FluidSynth(sound_font=soundfont_path)
 
-    result = subprocess.run(['fluidsynth', '--version'], capture_output=True, text=True)
     wav_path = midi_path.replace(".mid", ".wav")  # 변환된 wav 파일 경로
+    print("웨이브 경로: ", wav_path)
+
     output_mp3 = midi_path.replace(".mid", "out") # 출력할 mp3 파일 경로
     output_mp3 += ".mp3"
+    print("mp3 경로: ", output_mp3)
 
-    fs.midi_to_audio(midi_path, wav_path) # 미디 파일을 wav 파일로 변환
-    audio = AudioSegment.from_wav(wav_path) # wav 파일 불러오기
-    audio.export(output_mp3, format="mp3")
+    try:
+        fs.midi_to_audio(midi_path, wav_path)
+        print(f"WAV 변환 완료: {wav_path}")
 
-    return output_mp3
+        audio = AudioSegment.from_wav(wav_path)
+        audio.export(output_mp3, format="mp3")
+        print(f"MP3 변환 완료: {output_mp3}")
+
+        return output_mp3
+    except Exception as e:
+        print(f"오류 발생: {e}")
+        return None
 
 def download_soundfont_from_s3():
     bucket_name = os.getenv("S3_BUCKET_NAME")
