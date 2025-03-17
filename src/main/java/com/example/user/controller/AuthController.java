@@ -1,5 +1,6 @@
 package com.example.user.controller;
 
+import com.example.user.dto.JoinDto;
 import com.example.user.service.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,9 +22,9 @@ public class AuthController {
     }
 
     @PostMapping("/join")
-    public ResponseEntity<?> join (String email, String password, String nickname, String birth,
-                                   @RequestParam List<String> preGenres) {
-        return authService.join(email,password,nickname,birth,preGenres);
+    public ResponseEntity<?> join (@RequestBody JoinDto joinDto) {
+        return authService.join(joinDto.getEmail(),joinDto.getPassword(), joinDto.getNickname(),
+                joinDto.getBirth(), joinDto.getPreGenres());
     }
 
     @PostMapping("/logout")
