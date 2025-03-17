@@ -1,0 +1,156 @@
+[
+  {
+    "genre": "Jazz",
+    "progressions": [
+      {
+        "pattern": "ii-V-I",
+        "example": ["D", "F", "A", "C", "G", "B"],
+        "midi": [
+          { "start": 0, "note": "D4", "velocity": 80 },
+          { "start": 500, "note": "F4", "velocity": 80 },
+          { "start": 1000, "note": "A4", "velocity": 80 },
+          { "start": 1500, "note": "C5", "velocity": 80 },
+          { "start": 2000, "note": "G4", "velocity": 85 },
+          { "start": 2500, "note": "B3", "velocity": 85 },
+          { "start": 3000, "note": "D4", "velocity": 85 },
+          { "start": 3500, "note": "F4", "velocity": 85 },
+          { "start": 4000, "note": "C4", "velocity": 90 },
+          { "start": 4500, "note": "E4", "velocity": 90 },
+          { "start": 5000, "note": "G4", "velocity": 90 },
+          { "start": 5500, "note": "B4", "velocity": 90 }
+        ]
+      }
+    ]
+  },
+  {
+    "genre": "Blues",
+    "progressions": [
+      {
+        "pattern": "12-bar Blues",
+        "example": ["E", "G", "B", "D", "A", "C"],
+        "midi": [
+          { "start": 0, "note": "E2", "velocity": 100 },
+          { "start": 500, "note": "G2", "velocity": 100 },
+          { "start": 1000, "note": "B2", "velocity": 100 },
+          { "start": 1500, "note": "D3", "velocity": 100 },
+          { "start": 2000, "note": "A2", "velocity": 100 },
+          { "start": 2500, "note": "C3", "velocity": 100 },
+          { "start": 3000, "note": "E3", "velocity": 100 },
+          { "start": 3500, "note": "B2", "velocity": 100 },
+          { "start": 4000, "note": "D3", "velocity": 100 },
+          { "start": 4500, "note": "A3", "velocity": 100 }
+        ]
+      }
+    ]
+  },
+  {
+    "genre": "Rock",
+    "progressions": [
+      {
+        "pattern": "I-V-vi-IV",
+        "example": ["C", "E", "G", "A", "F"],
+        "midi": [
+          { "start": 0, "note": "C3", "velocity": 120 },
+          { "start": 500, "note": "E3", "velocity": 120 },
+          { "start": 1000, "note": "G3", "velocity": 120 },
+          { "start": 1500, "note": "G3", "velocity": 120 },
+          { "start": 2000, "note": "G4", "velocity": 120 },
+          { "start": 2500, "note": "A3", "velocity": 120 },
+          { "start": 3000, "note": "C4", "velocity": 120 },
+          { "start": 3500, "note": "E4", "velocity": 120 },
+          { "start": 4000, "note": "F3", "velocity": 120 },
+          { "start": 4500, "note": "A3", "velocity": 120 },
+          { "start": 5000, "note": "C4", "velocity": 120 }
+        ]
+      }
+    ]
+  },
+  {
+    "genre": "Funk",
+    "progressions": [
+      {
+        "pattern": "I7-IV7",
+        "example": ["E", "G", "B", "D", "A", "C"],
+        "midi": [
+          { "start": 0, "note": "E3", "velocity": 100 },
+          { "start": 500, "note": "G3", "velocity": 100 },
+          { "start": 1000, "note": "B3", "velocity": 100 },
+          { "start": 1500, "note": "D4", "velocity": 100 },
+          { "start": 2000, "note": "A3", "velocity": 100 },
+          { "start": 2500, "note": "C4", "velocity": 100 },
+          { "start": 3000, "note": "E4", "velocity": 100 },
+          { "start": 3500, "note": "G4", "velocity": 100 }
+        ]
+      }
+    ]
+  },
+  {
+    "genre": "Classical",
+    "progressions": [
+      {
+        "pattern": "I-IV-V-I",
+        "example": ["C", "E", "G", "F", "A", "B"],
+        "midi": [
+          { "start": 0, "note": "C4", "velocity": 90 },
+          { "start": 500, "note": "E4", "velocity": 90 },
+          { "start": 1000, "note": "G4", "velocity": 90 },
+          { "start": 1500, "note": "C5", "velocity": 90 },
+          { "start": 2000, "note": "F4", "velocity": 90 },
+          { "start": 2500, "note": "A4", "velocity": 90 },
+          { "start": 3000, "note": "C5", "velocity": 90 },
+          { "start": 3500, "note": "F5", "velocity": 90 },
+          { "start": 4000, "note": "G4", "velocity": 90 },
+          { "start": 4500, "note": "B4", "velocity": 90 },
+          { "start": 5000, "note": "D5", "velocity": 90 },
+          { "start": 5500, "note": "C5", "velocity": 90 }
+        ]
+      }
+    ]
+  },
+  {
+    "genre": "R&B",
+    "progressions": [
+      {
+        "pattern": "I-vi-IV-V",
+        "example": ["C", "E", "G", "A", "F"],
+        "midi": [
+          { "start": 0, "note": "C4", "velocity": 80 },
+          { "start": 500, "note": "E4", "velocity": 80 },
+          { "start": 1000, "note": "G4", "velocity": 80 },
+          { "start": 1500, "note": "B4", "velocity": 80 },
+          { "start": 2000, "note": "A3", "velocity": 80 },
+          { "start": 2500, "note": "C4", "velocity": 80 },
+          { "start": 3000, "note": "E4", "velocity": 80 },
+          { "start": 3500, "note": "G4", "velocity": 80 },
+          { "start": 4000, "note": "F4", "velocity": 80 },
+          { "start": 4500, "note": "A4", "velocity": 80 },
+          { "start": 5000, "note": "C5", "velocity": 80 },
+          { "start": 5500, "note": "G4", "velocity": 80 }
+        ]
+      }
+    ]
+  },
+  {
+    "genre": "Bossa Nova",
+    "progressions": [
+      {
+        "pattern": "ii-V-I",
+        "example": ["D", "F", "A", "C", "G", "B"],
+        "midi": [
+          { "start": 0, "note": "D3", "velocity": 85 },
+          { "start": 500, "note": "F3", "velocity": 85 },
+          { "start": 1000, "note": "A3", "velocity": 85 },
+          { "start": 1500, "note": "C4", "velocity": 85 },
+          { "start": 2000, "note": "G3", "velocity": 90 },
+          { "start": 2500, "note": "B3", "velocity": 90 },
+          { "start": 3000, "note": "D4", "velocity": 90 },
+          { "start": 3500, "note": "F4", "velocity": 90 },
+          { "start": 4000, "note": "C4", "velocity": 90 },
+          { "start": 4500, "note": "E4", "velocity": 90 },
+          { "start": 5000, "note": "G4", "velocity": 90 },
+          { "start": 5500, "note": "B4", "velocity": 90 }
+        ]
+      }
+    ]
+  }
+]

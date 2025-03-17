@@ -27,6 +27,8 @@ build/
 *.tar.gz
 *.egg
 *.whl
+sound/
+temp_music/
 
 # Windows 관련 파일
 Thumbs.db

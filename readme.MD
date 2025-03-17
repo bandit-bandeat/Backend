@@ -20,20 +20,21 @@
   - 스타일 변경된 mid 텍스트 파일을 다시 mid 파일로 변환
     - mid 파일을 mp3로 변환하여 반환
       - ✅ 사용자가 MP3 업로드
-        ✔ Flask request.files['music_file'] 활용
+        - Flask request.files['music_file'] 활용
       
         ✅ MP3 → MIDI 변환
-        ✔ librosa + pretty_midi
-        Basic Pitch (Spotify)
+        - Basic Pitch (Spotify) 사용해서 변환
       
         ✅ MIDI → 텍스트 변환 후 GPT 스타일 변경
-        ✔ pretty_midi로 MIDI 분석, GPT-4 API 활용
+        - pretty_midi로 MIDI 파일 텍스트로 변환
+        - GPT-4 API 활용해서 원하는 스타일 MIDI 텍스트로 변환
       
         ✅ GPT가 변환한 텍스트를 MIDI로 복원
-        ✔ MIDIUtil로 MIDI 파일 생성
+        - pretty_midi로 MIDI 텍스트를 MIDI 파일로 복원
       
         ✅ MIDI → MP3 변환
-        ✔ fluidsynth 및 pydub 사용
+        - midi2audio의 FluidSynth (추가 설치 필요)
+        - pydub 사용
 
 
 
