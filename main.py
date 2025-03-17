@@ -119,7 +119,7 @@ if __name__ == '__main__':
     print("유레카 연결")
     eureka_client.register_service()
     print("플라스크 실행")
-    app.run(host='0.0.0.0', port=5000, debug = True)
+    app.run(host='0.0.0.0', port=5000, debug = False)
 
 
 
