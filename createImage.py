@@ -59,16 +59,24 @@ def generate_logo_name(lyrics):
 def generate_image(prompt):
     try:
         response = openai.Image.create(
-            model="dall-e-3",
+            model="dall-e-3",  # 최신 모델 이름
             prompt=prompt,
             size="1024x1024",
             quality="standard",
             n=1
         )
-        return response['data'][0]['url']
-    except Exception as e:
-        print(f"Error generating image: {e}")
+        image_url = response['data'][0]['url']
+        if not image_url:
+            raise ValueError("이미지 URL이 비어 있습니다.")
+        return image_url
+    except openai.error.OpenAIError as e:
+        print(f"OpenAI API 오류: {e}")
         return None
+    except Exception as e:
+        print(f"이미지 생성 오류: {e}")
+        return None
+
+
 
 # 이미지 다운로드 함수
 def download_image(image_url, filename):
