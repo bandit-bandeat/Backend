@@ -18,6 +18,7 @@ AWS_BUCKET_NAME = os.getenv("AWS_BUCKET_NAME")
 ROOT = os.getenv('DB_ROOT')
 PASSWORD = os.getenv('DB_PASSWORD')
 URL = os.getenv('DB_URL')
+NAME = os.getenv('DB_NAME')
 
 print(ROOT, PASSWORD, URL)
 
@@ -25,10 +26,11 @@ print(ROOT, PASSWORD, URL)
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{ROOT}:{PASSWORD}@{URL}'
-db.init_app(app)
-# 라우팅
-change = Blueprint('create', __name__, url_prefix='/create')
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{ROOT}:{PASSWORD}@{URL}/{NAME}'
+app.config['KEY'] = os.getenv('OPENAI_API_KEY')
+openai.api_key = app.config['KEY']
+
+
 
 s3_client = boto3.client(
     's3',
@@ -37,6 +39,9 @@ s3_client = boto3.client(
     region_name='ap-northeast-3' 
 )
 
+db.init_app(app)
+# 라우팅
+change = Blueprint('create', __name__, url_prefix='/create')
 
 def generate_logo_name(lyrics):
     try:
@@ -44,7 +49,7 @@ def generate_logo_name(lyrics):
             model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": "You are an AI that generates creative brand names based on lyrics."},
-                {"role": "user", "content": f"Generate a short, catchy logo name based on these lyrics: {lyrics}"}
+                {"role": "user", "content": f"Generate a short, catchy logo name in Korean based on these lyrics: {lyrics}"}
             ]
         )
         return response["choices"][0]["message"]["content"].strip()

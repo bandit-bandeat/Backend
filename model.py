@@ -34,12 +34,14 @@ def is_change_able(email):
     user = Users.query.filter_by(email=email).first()
     ai_table = AiTable.query.filter_by(email=email).first()
 
-    # 맴버쉽 가입 했으면 통과
+    # 사용자가 존재하지 않으면 False 반환
+    if not user or not ai_table:
+        return False
+
+    # 멤버십 가입자가 아니면 하루 제한 확인
     if user.membership == 1:
         return True
-    # 맴버쉽 가입 안했으면 하루 제한 초과했는지 확인
     else:
-        # 하루 제한 아래면 ok
         if ai_table.image_Cnt < 10:
             ai_table.image_Cnt += 1
             db.session.commit()
