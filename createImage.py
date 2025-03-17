@@ -70,7 +70,7 @@ def generate_image(prompt):
         )
         return response['data'][0]['url']
     except Exception as e:
-        print(f"Error generating image: {e}")
+        print("Error generating image:", e, flush=True)
         return None
 
 # 이미지 다운로드 함수
