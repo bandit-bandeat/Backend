@@ -17,12 +17,12 @@ import boto3
 load_dotenv() # .env 파일 불러오기
 
 def mp3_to_midi_text( music_file ):
-    print(type(music_file))
+    print(type(music_file), flush=True)
 
     # mp3를 미디로 변환한 파일의 경로 받아오기
     midi_path, base_name = mp3_to_midi(music_file)
 
-    print("미디 경로: ", midi_path)
+    print("미디 경로: ", midi_path, flush=True)
 
     midi_text = midi_to_text(midi_path, base_name)
 
@@ -103,7 +103,7 @@ def text_to_midi(midi_text, base_name):
 
     for line in midi_text.split("\n"):
         if "Note:" in line:  # 노트 정보가 포함된 라인 찾기
-            print("지금 바꾸는 노트: ",line )
+            print("지금 바꾸는 노트: ",line , flush=True)
             parts = line.split(",")
             note_name = parts[0].split(":")[1].strip()  # 노트 이름 추출 (예: C4)
             start_time = float(parts[1].split(":")[1].strip())  # 시작 시간
@@ -121,29 +121,29 @@ def text_to_midi(midi_text, base_name):
     return f'./temp_music/{base_name}.mid'
 
 def midi_to_mp3(midi_path):
-    print("midi_to_mp3 시작")
+    print("midi_to_mp3 시작", flush=True)
     soundfont_path = download_soundfont_from_s3()
     fs = FluidSynth(sound_font=soundfont_path)
 
     wav_path = midi_path.replace(".mid", ".wav")  # 변환된 wav 파일 경로
-    print("웨이브 경로: ", wav_path)
+    print("웨이브 경로: ", wav_path, flush=True)
 
     output_mp3 = midi_path.replace(".mid", "out") # 출력할 mp3 파일 경로
     output_mp3 += ".mp3"
-    print("mp3 경로: ", output_mp3)
+    print("mp3 경로: ", output_mp3, flush=True)
 
     try:
-        print("FluidSynth 실행 전")
+        print("FluidSynth 실행 전", flush=True)
         fs.midi_to_audio(midi_path, wav_path)
-        print(f"WAV 변환 완료: {wav_path}")
+        print(f"WAV 변환 완료: {wav_path}", flush=True)
 
         audio = AudioSegment.from_wav(wav_path)
         audio.export(output_mp3, format="mp3")
-        print(f"MP3 변환 완료: {output_mp3}")
+        print(f"MP3 변환 완료: {output_mp3}", flush=True)
 
         return output_mp3
     except Exception as e:
-        print(f"오류 발생: {e}")
+        print(f"오류 발생: {e}", flush=True)
         traceback.print_exc()
 
 def download_soundfont_from_s3():
@@ -165,9 +165,9 @@ def download_soundfont_from_s3():
 
         # S3에서 파일 다운로드
         s3_client.download_file(bucket_name, s3_key, local_file_path)
-        print(f"파일이 다운로드되었습니다: {local_file_path}")
+        print(f"파일이 다운로드되었습니다: {local_file_path}", flush=True)
     else:
-        print(f"파일이 이미 존재합니다: {local_file_path}")
+        print(f"파일이 이미 존재합니다: {local_file_path}", flush=True)
 
     # 로컬 파일 경로 반환
     return local_file_path

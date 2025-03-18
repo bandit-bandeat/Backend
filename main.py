@@ -51,8 +51,8 @@ def music_change():
     music_file = request.files['music_file']
     style = request.form['style']
     email = request.form['email']
-    print(type(music_file))
-    print(style)
+    print(type(music_file), flush=True)
+    print(style, flush=True)
 
     if is_change_able(email):
         midi_texts, base_name = music_changer.mp3_to_midi_text(music_file)
@@ -66,12 +66,12 @@ def music_change():
                         f'Cmaj7 이런거 쓰지 말고 pretty_midi 라이브러리가 읽을 수 있게 출력해줘\n'
                         f'Note: C2,Start Time: 28.659090909090907, End Time: 28.927272727272726, Velocity: 59 이 형식대로 출력해줘\n'
                         f'그냥 C, D, 이렇게만 하면 안되고, C3 이렇게 적어야 해')
-            print(question)
+            print(question, flush=True)
             response = query_engin_midi.query(question)
             #print(response)s
             answer = str(response)
             answers += "\n" + answer
-        print("출력 잘 되남: ", answers)
+        print("출력 잘 되남: ", answers, flush=True)
         mp3_path = music_changer.midi_text_to_mp3(answers, base_name)
 
         # mp3 전송 후, 파일 삭제
@@ -83,11 +83,11 @@ def music_change():
                 for file_path in files_to_delete:
                     try:
                         os.remove(file_path)
-                        print(f"삭제됨: {file_path}")
+                        print(f"삭제됨: {file_path}", flush=True)
                     except Exception as e:
-                        print(f"파일 삭제 실패: {file_path}, 오류: {e}")
+                        print(f"파일 삭제 실패: {file_path}, 오류: {e}", flush=True)
             except Exception as e:
-                print(f'파일 삭제 실패: {e}')
+                print(f'파일 삭제 실패: {e}', flush=True)
             return response
         # 웹에서 실행하기 어려우면 요청 보내면 다운로드로 바로 되게 설정
         #return send_file(mp3_path, as_attachment=True)
@@ -102,7 +102,7 @@ def music_change():
 def code_change():
     question = request.json.get('question')
     email = request.json.get('email')
-    print(email)
+    print(email, flush=True)
     if is_change_able(email):
         print("질문 가능합니다")
         question = (f'대답은 한글로 해줘\n{question}\n'
@@ -110,9 +110,9 @@ def code_change():
                     f'기존 코드 진행 : ***\n'
                     f'바꾼 코드 진행 : ***\n'
                     f'이렇게 바꾼 이유: ***\n')
-        print(question)
+        print(question, flush=True)
         response = query_engin.query(question)
-        print(response)
+        print(response, flush=True)
         answer = str(response)
         return jsonify({"answer": answer})
     return jsonify({"error": "하루 질문량을 초과했습니다."}), 400
