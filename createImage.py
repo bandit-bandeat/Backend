@@ -46,8 +46,8 @@ def generate_logo_name(lyrics):
     try:
         response = openai.ChatCompletion.create(
             model="gpt-4o-mini",
-            messages=[{"role": "system", "content": "You are an AI that generates creative brand names based on lyrics."},
-                      {"role": "user", "content": f"Generate a short, catchy logo name in Korean based on these lyrics: {lyrics}"}]
+            messages=[{"role": "system", "content": "당신은 가사를 바탕으로 창의적인 브랜드 이름을 생성하는 AI입니다. 이름은 무조건 한국어로 작성되어야 하며, 10자 이하로 제한됩니다."},
+                      {"role": "user", "content": f"다음 가사를 바탕으로 10자 이하의 짧고 캐치한 로고 이름을 생성해주세요: {lyrics}"}]
         )
         logo_name = response["choices"][0]["message"]["content"].strip()
 
