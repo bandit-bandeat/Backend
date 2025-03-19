@@ -29,8 +29,8 @@ app.config['KEY'] = os.getenv('OPEN_AI_KEY')
 openai.api_key = app.config['KEY']
 
 # GPT-4o Mini를 사용
-llm = OpenAI(model="gpt-4o-mini", temperature=0.7, api_key=app.config['KEY'])
-Settings.llm = llm
+#llm = OpenAI(model="gpt-4o-mini", temperature=0.7, api_key=app.config['KEY'])
+#Settings.llm = llm
 
 # 코드 변환 쿼리 엔진
 documents = SimpleDirectoryReader('./data/code').load_data()
