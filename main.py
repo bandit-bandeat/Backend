@@ -29,7 +29,7 @@ app.config['KEY'] = os.getenv('OPEN_AI_KEY')
 openai.api_key = app.config['KEY']
 
 # GPT-4o Mini를 사용
-llm = OpenAI(model="gpt-3.5-turbo", temperature=0.7, api_key=app.config['KEY'])
+llm = OpenAI(model="gpt-4o-mini", temperature=0.7, api_key=app.config['KEY'])
 Settings.llm = llm
 
 # 코드 변환 쿼리 엔진
@@ -59,16 +59,16 @@ def music_change():
         answers = ""
         for i in range(4):
             question = (f'대답은 한글로 해주고,'
-                        f'답변은 다른 말 없이, 미디 텍스트만 보여주고, 텍스트 길이는 입력 텍스트랑 동일하게 해줘'
+                        f'답변은 다른 말 없이, 미디 텍스트만 보여주고, 텍스트 길이는 입력 텍스트랑 동일하게 해줘\n'
+                        f'절대 Cmaj7이나 C,D 이런거 반환하면 안돼. 절대야\n'
+                        f'Cmaj7 이런거 쓰지 말고 pretty_midi 라이브러리가 읽을 수 있게 출력해줘\n'
                         f'화음은 각각 한 음으로 표현해줘.\n{midi_texts[i]}\n '
                         f'이 미디 텍스트를 {style}형식으로 바꿔줘\n'
                         f'절대로 화음으로 표현하지 말고, 한 음으로 표현해야 해\n'
-                        f'Cmaj7 이런거 쓰지 말고 pretty_midi 라이브러리가 읽을 수 있게 출력해줘\n'
                         f'Note: C2,Start Time: 28.659090909090907, End Time: 28.927272727272726, Velocity: 59 이 형식대로 출력해줘\n'
                         f'그냥 C, D, 이렇게만 하면 안되고, C3 이렇게 적어야 해')
             print(question, flush=True)
             response = query_engin_midi.query(question)
-            #print(response)s
             answer = str(response)
             answers += "\n" + answer
         print("출력 잘 되남: ", answers, flush=True)
