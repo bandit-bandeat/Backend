@@ -60,13 +60,16 @@ def music_change():
         for i in range(4):
             question = (f'대답은 한글로 해주고,'
                         f'답변은 다른 말 없이, 미디 텍스트만 보여주고, 텍스트 길이는 입력 텍스트랑 동일하게 해줘\n'
-                        f'절대 Cmaj7이나 C,D 이런거 반환하면 안돼. 절대야\n'
-                        f'Cmaj7 이런거 쓰지 말고 pretty_midi 라이브러리가 읽을 수 있게 출력해줘\n'
-                        f'화음은 각각 한 음으로 표현해줘.\n{midi_texts[i]}\n '
+                        f'triad는 chode 형태로 rag 데이터 참고해서\n'
+                        f'pretty_midi 라이브러리가 읽을 수 있게 출력해줘\n'
+                        f'{midi_texts[i]}\n '
                         f'이 미디 텍스트를 {style}형식으로 바꿔줘\n'
-                        f'절대로 화음으로 표현하지 말고, 한 음으로 표현해야 해\n'
-                        f'Note: C2,Start Time: 28.659090909090907, End Time: 28.927272727272726, Velocity: 59 이 형식대로 출력해줘\n'
-                        f'그냥 C, D, 이렇게만 하면 안되고, C3 이렇게 적어야 해')
+                        f'절대로 화음으로 표현하지 말고, C3, D4, E2 이렇게 출력해 줘\n'
+                        f'아래의 입력대로 출력해줘\n'
+                        f'Note: C2,Start Time: 28.659090909090907, End Time: 28.927272727272726, Velocity: 59\n'
+                        f'Note: D2,Start Time: 6.504545454545454, End Time: 6.6909090909090905, Velocity: 36\n'
+                        f'Note: D3,Start Time: 6.795454545454545, End Time: 6.970454545454545, Velocity: 37\n'
+                        f'Note: D2,Start Time: 6.888636363636364, End Time: 7.620454545454545, Velocity: 68\n')
             print(question, flush=True)
             response = query_engin_midi.query(question)
             answer = str(response)
