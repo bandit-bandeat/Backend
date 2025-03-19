@@ -40,7 +40,7 @@ query_engin = index.as_query_engine()
 # mp3 변환 쿼리 엔진
 documents_midi = SimpleDirectoryReader('./data/midi').load_data()
 index_midi = GPTVectorStoreIndex(documents)
-query_engin_midi = index.as_query_engine()
+query_engin_midi = index_midi.as_query_engine()
 
 # db 테이블 연결
 db.init_app(app)
