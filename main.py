@@ -60,7 +60,9 @@ def music_change():
         for i in range(4):
             question = (f'대답은 한글로 해주고,'
                         f'답변은 다른 말 없이, 미디 텍스트만 보여주고, 텍스트 길이는 입력 텍스트랑 동일하게 해줘\n'
-                        f'triad는 chode 형태로 rag 데이터 참고해서\n'
+                        f'Cmaj7은 각각 D4, F#4,A4\n'
+                        f'Dm7은 각각 D4, F#4, A4, C5\n'
+                        f'위와 같이 모든 화음은 각각 한 음으로 나눠서\n'
                         f'pretty_midi 라이브러리가 읽을 수 있게 출력해줘\n'
                         f'{midi_texts[i]}\n '
                         f'이 미디 텍스트를 {style}형식으로 바꿔줘\n'
