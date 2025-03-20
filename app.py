@@ -201,11 +201,11 @@ naver_shop = NaverShopAPI(
 )
 recommender = InstrumentRecommender(groq_client, naver_shop)
 
-@app.route('/')
+@app.route('/ins')
 def home():
     return render_template('index.html')
 
-@app.route('/recommend', methods=['POST'])
+@app.route('/ins/recommend', methods=['POST'])
 def recommend():
     try:
         data = request.get_json()
