@@ -120,9 +120,9 @@ def code_change():
 app.register_blueprint(change)
 
 if __name__ == '__main__':
-    print("유레카 연결")
+    print("유레카 연결",flush=True)
     eureka_client.register_service()
-    print("플라스크 실행")
+    print("플라스크 실행", flush=True)
     app.run(host='0.0.0.0', port=5000, debug = False)
 
 
