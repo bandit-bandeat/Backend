@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 곡 추천 시스템</title>
+    <script>
+        async function getRecommendations() {
+            const songInput = document.getElementById("songInput").value;
+            const songList = songInput.split("\n").map(song => song.trim()).filter(song => song);
+
+            if (songList.length === 0) {
+                alert("곡 제목을 입력해주세요!");
+                return;
+            }
+
+            document.getElementById("loading").style.display = "block";
+
+            const response = await fetch("/recommend_songs", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ songs: songList })
+            });
+
+            const data = await response.json();
+            document.getElementById("loading").style.display = "none";
+
+            if (data.error) {
+                document.getElementById("result").innerHTML = `<p style="color:red;">오류: ${data.error}</p>`;
+            } else {
+                document.getElementById("result").innerHTML = `<h3>추천 결과:</h3><pre>${data.recommendations}</pre>`;
+            }
+        }
+    </script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        textarea { width: 80%; height: 100px; margin-bottom: 10px; }
+        button { padding: 10px 20px; font-size: 16px; }
+        #loading { display: none; color: blue; }
+    </style>
+</head>
+<body>
+    <h1>🎵 AI 곡 추천 시스템 🎵</h1>
+    <p>아래에 곡 제목과 아티스트를 입력하세요 (한 줄에 하나씩)</p>
+    <textarea id="songInput" placeholder="예: Blinding Lights - The Weeknd"></textarea><br>
+    <button onclick="getRecommendations()">추천 받기</button>
+    <p id="loading">🔍 AI가 분석 중입니다...</p>
+    <div id="result"></div>
+</body>
+</html>
