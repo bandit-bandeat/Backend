@@ -46,6 +46,6 @@ def register_service():
     )
 
     if response.status_code == 200:
-        print(f"Service {service_name} registered successfully!")
+        print(f"Service {service_name} registered successfully!",flush=True)
     else:
-        print(f"Failed to register service. Status code: {response.status_code}")
+        print(f"Failed to register service. Status code: {response.status_code}", flush=True)
