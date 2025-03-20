@@ -236,4 +236,5 @@ def recommend():
 if __name__ == '__main__':
     print("유레카 연결", flush=True)
     eureka_client.register_service()
-    app.run(debug=True)
+    print("플라스크 실행", flush=True)
+    app.run(host='0.0.0.0', port=5000, debug = False)
