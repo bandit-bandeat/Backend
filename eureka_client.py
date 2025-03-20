@@ -8,7 +8,7 @@ def register_service():
     EUREKA_SERVER_URL = "http://18.139.20.145:8761/eureka/apps/"
 
     # Flask 애플리케이션 서비스 정보 설정
-    service_name = "changeService"  # 맞게 수정
+    service_name = "instrumentService"  # 맞게 수정
     app_id = "flask-app-id"
     instance_id = f"{service_name}-{os.getpid()}"  # 예시로 고유 ID 생성
     host_name = "localhost"  # Flask 서버가 동작하는 호스트
