@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template
 from groq import Groq
 import os
 from dotenv import load_dotenv
+import eureka_client
 
 app = Flask(__name__)
 load_dotenv()
@@ -71,4 +72,7 @@ def recommend_songs():
     return jsonify({"recommendations": result})
 
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=True)
+    print("유레카 연결", flush=True)
+    eureka_client.register_service()
+    print("플라스크 실행", flush=True)
+    app.run(host='0.0.0.0', port=5000, debug=False)
