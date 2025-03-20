@@ -19,6 +19,9 @@ public class GatewayApplication {
     @Value("${gateway.image_create}")
     private String imageCreate;
 
+    @Value("${gateway.recommand}")
+    private String recommand;
+
     public static void main(String[] args) {
         SpringApplication.run(GatewayApplication.class, args);
     }
@@ -40,11 +43,14 @@ public class GatewayApplication {
                         r -> r.path("/music/**").uri("lb://post"))
 
 
-                .route("change",
+                .route("ai",
                         r-> r.path("/change/**").uri(codeChange))
 
-                .route("change",
+                .route("ai",
                         r-> r.path("/generatelogo/**").uri(imageCreate))
+
+                .route("ai",
+                        r-> r.path("/ins/**").uri(recommand))
                 .build();
     }
 }
