@@ -33,8 +33,8 @@ public class PostController {
     }
 
     @GetMapping("/{postId}")
-    public ResponseEntity<?> getDetail(@PathVariable long postId) {
-        return postService.getDetail(postId);
+    public ResponseEntity<?> getDetail(@PathVariable long postId, String email) {
+        return postService.getDetail(postId, email);
     }
 
     @PostMapping("/update")

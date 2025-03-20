@@ -136,7 +136,7 @@ public class PostService {
         ));
     }
 
-    public ResponseEntity<?> getDetail(long postId) {
+    public ResponseEntity<?> getDetail(long postId, String email) {
         Post post = postRepository.findById(postId).orElse(null);
         if(post == null) return ResponseEntity.badRequest().body("게시글이 존재하지 않음");
 
@@ -153,12 +153,11 @@ public class PostService {
         postDto.setCreated(post.getCreated());
         postDto.setHeart(post.getHeart());
 
-        String email = post.getEmail();
 
         int isPostLike = postLikeRepository.countByEmailAndPostId(email, postId);
         postDto.setIsLike(isPostLike);
 
-        String writer = userRepository.findById(email).orElse(null).getNickname();
+        String writer = userRepository.findById(post.getEmail()).orElse(null).getNickname();
 
         List<String> postFileList = new ArrayList<>();
         if(post.getIsFile() == 1){
@@ -179,7 +178,7 @@ public class PostService {
             cmtDto.setContent(comment.getContent());
             cmtDto.setCmtId(comment.getCmtId());
 
-            isPostLike = cmtLikeRepository.countByCmtIdAndEmail(cmtDto.getCmtId(), cmtDto.getEmail());
+            isPostLike = cmtLikeRepository.countByCmtIdAndEmail(cmtDto.getCmtId(), email);
             cmtDto.setIsLike(isPostLike);
 
             cmtDto.setNickname(userRepository.findById(comment.getEmail()).orElse(null).getNickname());
