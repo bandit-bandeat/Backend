@@ -1,0 +1,224 @@
+{
+  "total_reviews": 1000,
+  "total_views": 2199920,
+  "categories": {
+    "일렉기타": {
+      "count": 258,
+      "total_views": 658326,
+      "average_views": 2551.65
+    },
+    "기타이펙터": {
+      "count": 233,
+      "total_views": 516528,
+      "average_views": 2216.86
+    },
+    "멀티이펙터": {
+      "count": 109,
+      "total_views": 299736,
+      "average_views": 2749.87
+    },
+    "그외의 모든것들": {
+      "count": 99,
+      "total_views": 178553,
+      "average_views": 1803.57
+    },
+    "기타앰프": {
+      "count": 61,
+      "total_views": 101811,
+      "average_views": 1669.03
+    },
+    "넥/바디/부품류": {
+      "count": 38,
+      "total_views": 74327,
+      "average_views": 1955.97
+    },
+    "페달보드": {
+      "count": 35,
+      "total_views": 90259,
+      "average_views": 2578.83
+    },
+    "일렉베이스": {
+      "count": 33,
+      "total_views": 45996,
+      "average_views": 1393.82
+    },
+    "픽업": {
+      "count": 23,
+      "total_views": 49158,
+      "average_views": 2137.3
+    },
+    "모니터링/헤드폰/스피커/앰프": {
+      "count": 12,
+      "total_views": 20139,
+      "average_views": 1678.25
+    },
+    "어쿠스틱기타": {
+      "count": 11,
+      "total_views": 18680,
+      "average_views": 1698.18
+    },
+    "오디오인터페이스/레코더/믹서": {
+      "count": 10,
+      "total_views": 20256,
+      "average_views": 2025.6
+    },
+    "소프트웨어/그외관련장비": {
+      "count": 10,
+      "total_views": 20670,
+      "average_views": 2067.0
+    },
+    "파워서플라이": {
+      "count": 8,
+      "total_views": 11896,
+      "average_views": 1487.0
+    },
+    "피크": {
+      "count": 8,
+      "total_views": 13066,
+      "average_views": 1633.25
+    },
+    "건반/신디/미디/컨트롤러": {
+      "count": 7,
+      "total_views": 7492,
+      "average_views": 1070.29
+    },
+    "케이블": {
+      "count": 6,
+      "total_views": 12075,
+      "average_views": 2012.5
+    },
+    "아웃보드/시그널프로세서/이펙트": {
+      "count": 5,
+      "total_views": 8817,
+      "average_views": 1763.4
+    },
+    "그외의 이펙터들": {
+      "count": 5,
+      "total_views": 7641,
+      "average_views": 1528.2
+    },
+    "스트링": {
+      "count": 5,
+      "total_views": 9566,
+      "average_views": 1913.2
+    },
+    "베이스이펙터": {
+      "count": 3,
+      "total_views": 4317,
+      "average_views": 1439.0
+    },
+    "부품류": {
+      "count": 3,
+      "total_views": 2893,
+      "average_views": 964.33
+    },
+    "케이스": {
+      "count": 3,
+      "total_views": 6933,
+      "average_views": 2311.0
+    },
+    "전자드럼": {
+      "count": 2,
+      "total_views": 2603,
+      "average_views": 1301.5
+    },
+    "마이크/마이크관련": {
+      "count": 2,
+      "total_views": 2056,
+      "average_views": 1028.0
+    },
+    "베이스앰프": {
+      "count": 2,
+      "total_views": 1844,
+      "average_views": 922.0
+    },
+    "그외의 앰프들": {
+      "count": 2,
+      "total_views": 4175,
+      "average_views": 2087.5
+    },
+    "스트랩": {
+      "count": 2,
+      "total_views": 2813,
+      "average_views": 1406.5
+    },
+    "드럼세트": {
+      "count": 1,
+      "total_views": 1268,
+      "average_views": 1268.0
+    },
+    "어쿠스틱 베이스": {
+      "count": 1,
+      "total_views": 1651,
+      "average_views": 1651.0
+    },
+    "그외 드럼관련물품": {
+      "count": 1,
+      "total_views": 1091,
+      "average_views": 1091.0
+    },
+    "클래식기타": {
+      "count": 1,
+      "total_views": 1731,
+      "average_views": 1731.0
+    },
+    "관악기": {
+      "count": 1,
+      "total_views": 1553,
+      "average_views": 1553.0
+    }
+  },
+  "top_viewed": [
+    {
+      "title": "M-VAVE BLACK BOX (블랙박스) 앰프 모델러 & 이펙츠 프로세서 사용기 (02월 21일, V16.8)",
+      "category": "멀티이펙터",
+      "view_count": 21454
+    },
+    {
+      "title": "톤엑스 원(toneX One) 사용기",
+      "category": "기타이펙터",
+      "view_count": 12129
+    },
+    {
+      "title": "메트리박스2 리뷰!",
+      "category": "멀티이펙터",
+      "view_count": 8072
+    },
+    {
+      "title": "톤엑스 한달 사용후 사용기(꿀팁 추가)",
+      "category": "기타이펙터",
+      "view_count": 8030
+    },
+    {
+      "title": "펜더 톤마스터 프로 구매자들을 위한 소소한 사용법 & 예비구매자들을 위한 평가",
+      "category": "멀티이펙터",
+      "view_count": 7309
+    },
+    {
+      "title": "힐릭스 7년 쓴사람이 톤마스터 프로를 구입하고 느낀 장단점",
+      "category": "멀티이펙터",
+      "view_count": 6590
+    },
+    {
+      "title": "Pod go 팟고의 성능을 최대로 뽑아내는 3가지 방법",
+      "category": "멀티이펙터",
+      "view_count": 6459
+    },
+    {
+      "title": "15년간 오디오 인터페이스 써오면서 깨달은 노하우와 소소한 팁",
+      "category": "오디오인터페이스/레코더/믹서",
+      "view_count": 6421
+    },
+    {
+      "title": "현재 뮬에서 이슈되고 있는 두X리 기타 솔직 리뷰",
+      "category": "일렉기타",
+      "view_count": 6407
+    },
+    {
+      "title": "초보자를 위한 IR 적용 설명서 [무료IR다운로드 링크 첨부]",
+      "category": "기타이펙터",
+      "view_count": 6220
+    }
+  ],
+  "average_views": 2199.92
+}

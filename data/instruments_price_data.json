@@ -1,0 +1,500 @@
+{
+    "일렉기타": {
+        "entry": {
+            "range": [200000, 500000],
+            "description": "입문자에게 적합한 가격대, 기본적인 연주와 학습에 필요한 기능 중심",
+            "models": [
+                {
+                    "name": "Squier Bullet Stratocaster",
+                    "typical_price": 280000,
+                    "suitable_for": "처음 일렉기타를 시작하는 입문자",
+                    "color_options": ["Sunburst", "Black", "Arctic White"],
+                    "weight": "3.4kg",
+                    "pickup_config": "SSS",
+                    "sales_rank": "입문자용 1위",
+                    "beginner_friendly_score": "9/10"
+                },
+                {
+                    "name": "Yamaha Pacifica 012",
+                    "typical_price": 350000,
+                    "suitable_for": "입문자~초중급자",
+                    "color_options": ["Black", "Lake Blue", "Metallic Red"],
+                    "weight": "3.6kg",
+                    "pickup_config": "HSS",
+                    "sales_rank": "입문자용 3위",
+                    "beginner_friendly_score": "8.5/10"
+                },
+                {
+                    "name": "Ibanez GRX40",
+                    "typical_price": 290000,
+                    "suitable_for": "록/메탈 지향 입문자",
+                    "color_options": ["Metallic Light Blue", "Black Night"],
+                    "weight": "3.3kg",
+                    "pickup_config": "HSH",
+                    "beginner_friendly_score": "8/10"
+                },
+
+                {
+                    "name": "Cort G250",
+                    "typical_price": 380000,
+                    "suitable_for": "가성비 중시 입문자",
+                    "color_options": ["Sea Foam Green", "Black"],
+                    "weight": "3.5kg",
+                    "pickup_config": "HSS",
+                    "warranty": "2년",
+                    "beginner_friendly_score": "8.5/10"
+                },
+                
+                {
+                    "name": "Epiphone Les Paul Special VE",
+                    "typical_price": 320000,
+                    "suitable_for": "블루스/록 지향 입문자",
+                    "color_options": ["Vintage Sunburst", "Cherry"],
+                    "weight": "3.8kg",
+                    "pickup_config": "HH",
+                    "beginner_friendly_score": "8/10"
+                },
+                {
+                    "name": "Squier Affinity Telecaster",
+                    "typical_price": 360000,
+                    "suitable_for": "컨트리/블루스 지향 입문자",
+                    "color_options": ["Butterscotch Blonde", "Black"],
+                    "weight": "3.5kg",
+                    "pickup_config": "SS",
+                    "beginner_friendly_score": "8.5/10"
+                }
+            ]
+        },
+        "intermediate": {
+            "range": [500000, 1200000],
+            "description": "중급자를 위한 가격대, 더 나은 음질과 연주감 제공",
+            "models": [
+                {
+                    "name": "Fender Player Stratocaster",
+                    "typical_price": 900000,
+                    "suitable_for": "공연/녹음 활동 중급자",
+                    "color_options": ["3-Color Sunburst", "Tidepool", "Black"],
+                    "weight": "3.6kg",
+                    "pickup_config": "SSS",
+                    "sales_rank": "중급자용 1위",
+                    "quality_score": "8.5/10"
+                },
+                {
+                    "name": "Gibson Les Paul Studio",
+                    "typical_price": 1100000,
+                    "suitable_for": "록/블루스 지향 중급자",
+                    "color_options": ["Wine Red", "Ebony"],
+                    "weight": "4.2kg",
+                    "pickup_config": "HH",
+                    "quality_score": "9/10"
+                },
+                {
+                    "name": "PRS SE Custom 24",
+                    "typical_price": 950000,
+                    "suitable_for": "올라운더 지향 중급자",
+                    "color_options": ["Tobacco Sunburst", "Custom Color"],
+                    "weight": "3.5kg",
+                    "pickup_config": "HH",
+                    "quality_score": "8.5/10"
+                },
+                {
+                    "name": "Ibanez RG550",
+                    "typical_price": 850000,
+                    "suitable_for": "메탈/테크니컬 지향 중급자",
+                    "color_options": ["Desert Sun Yellow", "Road Flare Red"],
+                    "weight": "3.4kg",
+                    "pickup_config": "HSH",
+                    "quality_score": "8/10"
+                },
+                {
+                    "name": "Gretsch G2622 Streamliner",
+                    "typical_price": 750000,
+                    "suitable_for": "재즈/블루스 지향 중급자",
+                    "color_options": ["Gunmetal", "Torino Green"],
+                    "weight": "3.8kg",
+                    "pickup_config": "HH",
+                    "quality_score": "8/10"
+                }
+            ]
+        },
+        "professional": {
+            "range": [1200000, 5000000],
+            "description": "전문가급 연주자를 위한 최상급 품질의 기타",
+            "models": [
+                {
+                    "name": "Gibson Les Paul Standard",
+                    "typical_price": 3200000,
+                    "suitable_for": "프로페셔널 록/블루스 기타리스트",
+                    "color_options": ["Heritage Cherry Sunburst", "Bourbon Burst"],
+                    "weight": "4.2kg",
+                    "pickup_config": "HH",
+                    "quality_score": "9.5/10"
+                },
+                {
+                    "name": "Fender American Professional II",
+                    "typical_price": 2500000,
+                    "suitable_for": "프로페셔널 스튜디오 뮤지션",
+                    "color_options": ["3-Color Sunburst", "Miami Blue"],
+                    "weight": "3.6kg",
+                    "pickup_config": "SSS",
+                    "quality_score": "9.5/10"
+                },
+                {
+                    "name": "PRS Custom 24",
+                    "typical_price": 4000000,
+                    "suitable_for": "프로페셔널 올라운더",
+                    "color_options": ["Blood Orange", "Violet"],
+                    "weight": "3.5kg",
+                    "pickup_config": "HH",
+                    "quality_score": "9.8/10"
+                },
+                {
+                    "name": "Ibanez Prestige RG",
+                    "typical_price": 2200000,
+                    "suitable_for": "프로페셔널 메탈 기타리스트",
+                    "color_options": ["Galaxy Black", "Galaxy White"],
+                    "weight": "3.4kg",
+                    "pickup_config": "HSH",
+                    "quality_score": "9/10"
+                },
+                {
+                    "name": "ESP E-II Horizon",
+                    "typical_price": 2400000,
+                    "suitable_for": "프로페셔널 메탈/록 기타리스트",
+                    "color_options": ["See Thru Black", "Reindeer Blue"],
+                    "weight": "3.7kg",
+                    "pickup_config": "HH",
+                    "quality_score": "9.2/10"
+                }
+            ]
+        }
+    },
+
+
+    "베이스기타": {
+        "entry": {
+            "range": [200000, 600000],
+            "description": "입문자에게 적합한 가격대, 기본적인 베이스 사운드와 안정적인 연주감 제공",
+            "models": [
+                {
+                    "name": "Squier Affinity PJ Bass",
+                    "typical_price": 350000,
+                    "suitable_for": "처음 베이스를 시작하는 입문자",
+                    "color_options": ["Black", "Lake Placid Blue"],
+                    "weight": "3.8kg",
+                    "pickup_config": "PJ (프리시전+재즈)",
+                    "sales_rank": "입문자용 1위",
+                    "beginner_friendly_score": "9/10",
+                    "scale_length": "34인치"
+                },
+                {
+                    "name": "Yamaha TRBX304",
+                    "typical_price": 450000,
+                    "suitable_for": "입문~초중급자",
+                    "color_options": ["Black", "Candy Apple Red"],
+                    "weight": "3.7kg",
+                    "pickup_config": "Dual Humbuckers",
+                    "sales_rank": "입문자용 2위",
+                    "beginner_friendly_score": "8.5/10",
+                    "scale_length": "34인치"
+                },
+                {
+                    "name": "Ibanez GSR200",
+                    "typical_price": 300000,
+                    "suitable_for": "록/메탈 지향 입문자",
+                    "color_options": ["Black", "Brown Sunburst"],
+                    "weight": "3.6kg",
+                    "pickup_config": "PJ",
+                    "special_feature": "얇은 넥",
+                    "beginner_friendly_score": "8.5/10",
+                    "scale_length": "34인치"
+                },
+                {
+                    "name": "Cort Action Bass Plus",
+                    "typical_price": 280000,
+                    "suitable_for": "가성비 중시 입문자",
+                    "color_options": ["Trans Black", "Blue Metallic"],
+                    "weight": "3.7kg",
+                    "pickup_config": "PJ",
+                    "beginner_friendly_score": "8/10",
+                    "scale_length": "34인치"
+                },
+                {
+                    "name": "Sterling SUB Ray4",
+                    "typical_price": 500000,
+                    "suitable_for": "현대적 사운드 선호 입문자",
+                    "color_options": ["Satin Black", "Walnut Stain"],
+                    "weight": "3.9kg",
+                    "pickup_config": "Single Humbucker",
+                    "beginner_friendly_score": "8/10",
+                    "scale_length": "34인치"
+                }
+            ]
+        },
+        "intermediate": {
+            "range": [600000, 1500000],
+            "description": "중급자를 위한 가격대, 향상된 음질과 다양한 톤 조절 기능 제공",
+            "models": [
+                {
+                    "name": "Fender Player Jazz Bass",
+                    "typical_price": 1200000,
+                    "suitable_for": "공연/녹음 활동 중급자",
+                    "color_options": ["Sunburst", "Polar White"],
+                    "weight": "4.0kg",
+                    "pickup_config": "Dual Jazz",
+                    "quality_score": "9/10",
+                    "scale_length": "34인치"
+                },
+                {
+                    "name": "Ibanez SR750",
+                    "typical_price": 900000,
+                    "suitable_for": "퓨전/재즈 지향 중급자",
+                    "color_options": ["Natural Flat", "Aged Whiskey Burst"],
+                    "weight": "3.6kg",
+                    "pickup_config": "Nordstrand Pickups",
+                    "quality_score": "8.5/10",
+                    "scale_length": "34인치"
+                },
+                {
+                    "name": "Warwick Rockbass Corvette",
+                    "typical_price": 1100000,
+                    "suitable_for": "록/메탈 지향 중급자",
+                    "color_options": ["Nirvana Black", "Natural Satin"],
+                    "weight": "4.1kg",
+                    "pickup_config": "MEC Pickups",
+                    "quality_score": "8.5/10",
+                    "scale_length": "34인치"
+                },
+                {
+                    "name": "Spector Legend 4",
+                    "typical_price": 800000,
+                    "suitable_for": "올라운더 중급자",
+                    "color_options": ["Black Stain", "Metallic Red"],
+                    "weight": "3.8kg",
+                    "pickup_config": "Dual Humbucker",
+                    "quality_score": "8/10",
+                    "scale_length": "34인치"
+                },
+                {
+                    "name": "G&L Tribute L-2000",
+                    "typical_price": 850000,
+                    "suitable_for": "펑크/락 지향 중급자",
+                    "color_options": ["Tobacco Sunburst", "Gloss Black"],
+                    "weight": "4.2kg",
+                    "pickup_config": "Dual MFD",
+                    "quality_score": "8.5/10",
+                    "scale_length": "34인치"
+                }
+            ]
+        },
+        "professional": {
+            "range": [1500000, 5000000],
+            "description": "전문가급 연주자를 위한 최상급 품질의 베이스",
+            "models": [
+                {
+                    "name": "Fender American Professional II Jazz Bass",
+                    "typical_price": 2500000,
+                    "suitable_for": "프로페셔널 스튜디오 뮤지션",
+                    "color_options": ["3-Color Sunburst", "Dark Night"],
+                    "weight": "4.1kg",
+                    "pickup_config": "V-Mod II Jazz Bass",
+                    "quality_score": "9.5/10",
+                    "scale_length": "34인치"
+                },
+                {
+                    "name": "Music Man StingRay Special",
+                    "typical_price": 3000000,
+                    "suitable_for": "프로페셔널 올라운더",
+                    "color_options": ["Vintage Tobacco", "Charging Green"],
+                    "weight": "3.8kg",
+                    "pickup_config": "Neodymium Humbucker",
+                    "quality_score": "9.8/10",
+                    "scale_length": "34인치"
+                },
+                {
+                    "name": "Fodera Custom",
+                    "typical_price": 4500000,
+                    "suitable_for": "프로페셔널 퓨전/재즈",
+                    "color_options": ["Natural", "Custom Finish"],
+                    "weight": "3.9kg",
+                    "pickup_config": "Dual Fodera/Duncan",
+                    "quality_score": "10/10",
+                    "scale_length": "34인치"
+                },
+                {
+                    "name": "Sadowsky MetroLine",
+                    "typical_price": 3500000,
+                    "suitable_for": "프로페셔널 스튜디오/라이브",
+                    "color_options": ["Trans Blue", "Vintage Natural"],
+                    "weight": "3.7kg",
+                    "pickup_config": "Sadowsky J-Style",
+                    "quality_score": "9.7/10",
+                    "scale_length": "34인치"
+                },
+                {
+                    "name": "Spector NS-5XL",
+                    "typical_price": 2800000,
+                    "suitable_for": "프로페셔널 퓨전/메탈",
+                    "color_options": ["Black Stain", "Natural"],
+                    "weight": "4.0kg",
+                    "pickup_config": "EMG Active",
+                    "quality_score": "9.5/10",
+                    "scale_length": "35인치"
+                }
+            ]
+        }
+    },
+
+
+    "디지털피아노": {
+        "entry": {
+            "range": [400000, 800000],
+            "description": "입문자를 위한 가격대, 기본적인 피아노 터치감과 음색 제공",
+            "models": [
+                {
+                    "name": "Yamaha P-45",
+                    "typical_price": 650000,
+                    "suitable_for": "처음 피아노를 시작하는 입문자",
+                    "color_options": ["Black"],
+                    "weight": "11.5kg",
+                    "keys": "88건반",
+                    "key_type": "GHS(Graded Hammer Standard)",
+                    "polyphony": "64음",
+                    "built_in_sounds": "10개",
+                    "speakers": "2x6W",
+                    "sales_rank": "입문자용 1위",
+                    "beginner_friendly_score": "9/10"
+                },
+                {
+                    "name": "Roland FP-10",
+                    "typical_price": 700000,
+                    "suitable_for": "입문자~초중급자",
+                    "color_options": ["Black"],
+                    "weight": "12.3kg",
+                    "keys": "88건반",
+                    "key_type": "PHA-4 Standard",
+                    "polyphony": "96음",
+                    "built_in_sounds": "15개",
+                    "speakers": "2x6W",
+                    "beginner_friendly_score": "8.5/10"
+                },
+                {
+                    "name": "Casio CDP-S100",
+                    "typical_price": 500000,
+                    "suitable_for": "가성비 중시 입문자",
+                    "color_options": ["Black"],
+                    "weight": "10.5kg",
+                    "keys": "88건반",
+                    "key_type": "Scaled Hammer Action",
+                    "polyphony": "64음",
+                    "built_in_sounds": "10개",
+                    "speakers": "2x8W",
+                    "beginner_friendly_score": "8.5/10"
+                },
+                {
+                    "name": "Korg B2",
+                    "typical_price": 600000,
+                    "suitable_for": "실용음악 입문자",
+                    "color_options": ["Black"],
+                    "weight": "11.8kg",
+                    "keys": "88건반",
+                    "key_type": "Natural Weighted Hammer Action",
+                    "polyphony": "120음",
+                    "built_in_sounds": "12개",
+                    "speakers": "2x15W",
+                    "beginner_friendly_score": "8/10"
+                },
+                {
+                    "name": "Kawai ES110",
+                    "typical_price": 750000,
+                    "suitable_for": "클래식 지향 입문자",
+                    "color_options": ["Black", "White"],
+                    "weight": "12kg",
+                    "keys": "88건반",
+                    "key_type": "Responsive Hammer Compact II",
+                    "polyphony": "192음",
+                    "built_in_sounds": "19개",
+                    "speakers": "2x7W",
+                    "beginner_friendly_score": "8.5/10"
+                }
+            ]
+        },
+        "intermediate": {
+            "range": [800000, 2000000],
+            "description": "중급자를 위한 가격대, 향상된 터치감과 풍부한 음색 제공",
+            "models": [
+                {
+                    "name": "Yamaha P-515",
+                    "typical_price": 1500000,
+                    "suitable_for": "공연/녹음 활동 중급자",
+                    "color_options": ["Black", "White"],
+                    "weight": "22kg",
+                    "keys": "88건반",
+                    "key_type": "Natural Wood X (NWX)",
+                    "polyphony": "256음",
+                    "built_in_sounds": "40개",
+                    "speakers": "2x15W",
+                    "quality_score": "9/10"
+                },
+                {
+                    "name": "Roland FP-90X",
+                    "typical_price": 1800000,
+                    "suitable_for": "전문 연주자",
+                    "color_options": ["Black", "White"],
+                    "weight": "23.6kg",
+                    "keys": "88건반",
+                    "key_type": "PHA-50 Wood Hybrid",
+                    "polyphony": "무제한",
+                    "built_in_sounds": "350개",
+                    "speakers": "2x25W",
+                    "quality_score": "9.5/10"
+                },
+                {
+                    "name": "Kawai ES920",
+                    "typical_price": 1600000,
+                    "suitable_for": "클래식 연주자",
+                    "color_options": ["Black", "White"],
+                    "weight": "17.5kg",
+                    "keys": "88건반",
+                    "key_type": "Responsive Hammer III",
+                    "polyphony": "256음",
+                    "built_in_sounds": "38개",
+                    "speakers": "2x20W",
+                    "quality_score": "9/10"
+                }
+            ]
+        },
+        "professional": {
+            "range": [2000000, 5000000],
+            "description": "전문가급 연주자를 위한 최상급 디지털 피아노",
+            "models": [
+                {
+                    "name": "Yamaha CLP-785",
+                    "typical_price": 4500000,
+                    "suitable_for": "프로페셔널 피아니스트",
+                    "color_options": ["Polished Ebony", "Polished White"],
+                    "weight": "87kg",
+                    "keys": "88건반 (GrandTouch)",
+                    "key_type": "천연목재",
+                    "polyphony": "256음",
+                    "built_in_sounds": "53개",
+                    "speakers": "2x(25W+25W)+2x50W",
+                    "quality_score": "10/10"
+                },
+                {
+                    "name": "Roland LX708",
+                    "typical_price": 4000000,
+                    "suitable_for": "전문 연주자/교육자",
+                    "color_options": ["Charcoal Black", "Dark Rosewood"],
+                    "weight": "85kg",
+                    "keys": "88건반 (Hybrid Grand)",
+                    "key_type": "목재-플라스틱 하이브리드",
+                    "polyphony": "무제한",
+                    "built_in_sounds": "307개",
+                    "speakers": "4스피커 시스템",
+                    "quality_score": "9.8/10"
+                }
+            ]
+        }
+    }
+}
