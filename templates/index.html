@@ -151,7 +151,7 @@
             document.getElementById('chatContainer').appendChild(loadingDiv);
 
             try {
-                const response = await fetch('/recommend', {
+                const response = await fetch('/ins/recommend', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
