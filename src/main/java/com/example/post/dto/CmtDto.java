@@ -10,4 +10,6 @@ public class CmtDto {
     private String nickname;
     private String content;
     private long heart;
+
+    private int isLike;
 }

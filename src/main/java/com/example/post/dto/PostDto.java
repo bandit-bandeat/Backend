@@ -12,5 +12,7 @@ public class PostDto {
     private String kind;
     private long cnt;
     private long heart;
-    int isFile;
+    private int isFile;
+
+    private int isLike;
 }

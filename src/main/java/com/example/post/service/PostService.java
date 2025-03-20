@@ -30,6 +30,7 @@ public class PostService {
     private final AwsS3Service awsS3Service;
     private final UserRepository userRepository;
     private final CmtRepository cmtRepository;
+    private final CmtLikeRepository cmtLikeRepository;
 
     public ResponseEntity<?> write(String title, String content, String kind, String token, List<MultipartFile> files) {
         String email = "";
@@ -152,7 +153,12 @@ public class PostService {
         postDto.setCreated(post.getCreated());
         postDto.setHeart(post.getHeart());
 
-        String writer = userRepository.findById(post.getEmail()).orElse(null).getNickname();
+        String email = post.getEmail();
+
+        int isPostLike = postLikeRepository.countByEmailAndPostId(email, postId);
+        postDto.setIsLike(isPostLike);
+
+        String writer = userRepository.findById(email).orElse(null).getNickname();
 
         List<String> postFileList = new ArrayList<>();
         if(post.getIsFile() == 1){
@@ -172,6 +178,9 @@ public class PostService {
             cmtDto.setEmail(comment.getEmail());
             cmtDto.setContent(comment.getContent());
             cmtDto.setCmtId(comment.getCmtId());
+
+            isPostLike = cmtLikeRepository.countByCmtIdAndEmail(cmtDto.getCmtId(), cmtDto.getEmail());
+            cmtDto.setIsLike(isPostLike);
 
             cmtDto.setNickname(userRepository.findById(comment.getEmail()).orElse(null).getNickname());
 
