@@ -1,0 +1,68 @@
+name: playService CI/CD
+
+on:
+  push:
+    branches:
+      - findSongService
+  pull_request:
+    branches:
+      - findSongService
+
+
+jobs:
+  # 잡 전체에 대한 이름 (custom 가능)
+  gateway-CICD:
+    # ubuntu linux 준비 -> 해장 작업이 진행되는 베이스 OS 지정
+    runs-on: ubuntu-latest
+    # 개별 작업 단계 지정
+    steps:
+      - name: Github Repository 내 파일들 checkout(불러오기) 수행
+        uses: actions/checkout@v4
+
+      - name: .env 파일 동적 생성
+        run: |
+          echo "${{ secrets.PLAY_SERVICE_ENV }}" > ./.env
+          ls -a
+
+      - name: 대기 시간 추가
+        run: |
+          sleep 5
+
+      - name: 파일 압축
+        run: |
+          echo "압축 시작 전 파일 확인"
+          ls -a
+          echo "압축 시작"
+          tar --exclude='./.git' --ignore-failed-read -czvf run.tar.gz ./
+          echo "압축 완료..."
+          ls -a
+
+      - name: EC2에 파일 업로드
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.PLAY_SERVICE_HOST }}
+          username: ${{ secrets.CHANGE_SERVICE_EC2_USER }}
+          key: ${{ secrets.CHANGE_SERVICE_EC2_KEY }}
+          source: run.tar.gz
+          target: /home/ubuntu/findSongService/demo
+
+      - name: SSH로 ec2에 접속 후, 서버 가동
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.PLAY_SERVICE_HOST }}
+          username: ${{ secrets.CHANGE_SERVICE_EC2_USER }}
+          key: ${{ secrets.CHANGE_SERVICE_EC2_KEY }}
+          script_stop: true
+          script: |
+            ls -l /home/ubuntu/findSongService/demo
+            mv /home/ubuntu/findSongService/demo/run.tar.gz /home/ubuntu/findSongService/run.tar.gz
+            cd /home/ubuntu/findSongService
+            fuser -k -n tcp 5000 || true
+            tar -xzvf run.tar.gz
+            python3 -m venv venv
+            source venv/bin/activate
+            deactivate
+            source venv/bin/activate
+            pip install -r requirements.txt
+            python3 main.py > ./output.log 2>&1 &
+            rm -rf /home/ubuntu/findSongService/demo
