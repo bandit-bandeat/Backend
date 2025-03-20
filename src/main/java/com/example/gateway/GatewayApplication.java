@@ -22,6 +22,9 @@ public class GatewayApplication {
     @Value("${gateway.recommand}")
     private String recommand;
 
+    @Value("${gateway.playlist}")
+    private String playlist;
+
     public static void main(String[] args) {
         SpringApplication.run(GatewayApplication.class, args);
     }
@@ -51,6 +54,9 @@ public class GatewayApplication {
 
                 .route("ai",
                         r-> r.path("/ins/**").uri(recommand))
+
+                .route("ai",
+                        r-> r.path("/play/**").uri(playlist))
                 .build();
     }
 }

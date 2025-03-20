@@ -52,7 +52,7 @@ public class SecurityConfig {
         http.authorizeExchange(auth -> auth
                 .pathMatchers("/auth/**","/post/**","/comment/**","/change/**","/music/**",
                         "/chat/**",
-                        "/generatelogo/**","/ins/**"
+                        "/generatelogo/**","/ins/**","/play/**"
                 ).permitAll()
                 .pathMatchers("/admin/**").hasRole("ROLE_ADMIN")
                 .anyExchange().authenticated());
