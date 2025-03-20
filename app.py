@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import os
 import json
 import requests
+import eureka_client
 from groq import Groq
 
 app = Flask(__name__)
@@ -233,4 +234,6 @@ def recommend():
         return jsonify({'error': '죄송합니다. 오류가 발생했습니다. 다시 시도해 주세요.'}), 500
 
 if __name__ == '__main__':
+    print("유레카 연결", flush=True)
+    eureka_client.register_service()
     app.run(debug=True)
