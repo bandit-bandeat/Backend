@@ -8,8 +8,9 @@ import eureka_client
 from groq import Groq
 
 app = Flask(__name__)
-CORS(app)
+#CORS(app)
 load_dotenv()
+CORS(app, resources={r"/ins/recommend": {"origins": "http://localhost:3000"}})
 
 class InstrumentDatabase:
     def __init__(self):
