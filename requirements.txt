@@ -64,8 +64,6 @@ SpeechRecognition==3.14.1
 SQLAlchemy==2.0.39
 sympy==1.13.3
 threadpoolctl==3.6.0
-torchaudio==2.6.0.dev20250318
-torchvision==0.22.0.dev20250318
 tqdm==4.67.1
 trio==0.29.0
 trio-websocket==0.12.2
