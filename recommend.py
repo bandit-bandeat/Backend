@@ -52,12 +52,12 @@ def analyze_and_recommend(songs):
 
     return response.choices[0].message.content.strip()
 
-@app.route('/')
+@app.route('/play/')
 def home():
     """웹 페이지 렌더링"""
     return render_template('index.html')
 
-@app.route('/recommend_songs', methods=['POST'])
+@app.route('/play/recommend_songs', methods=['POST'])
 def recommend_songs():
     """사용자의 곡 리스트를 받아서 추천 곡을 반환"""
     data = request.json
