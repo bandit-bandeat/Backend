@@ -228,7 +228,7 @@ def recommend():
         return jsonify(result)
         
     except Exception as e:
-        print(f"추천 오류: {str(e)}")
+        print(f"추천 오류: {str(e)}", flush=True)
         import traceback
         traceback.print_exc()
         return jsonify({'error': '죄송합니다. 오류가 발생했습니다. 다시 시도해 주세요.'}), 500

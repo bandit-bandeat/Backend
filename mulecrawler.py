@@ -32,14 +32,14 @@ def crawl_mule_reviews(target_count=1000):
                 
                 response = session.get(base_url, headers=headers, params={'page': page})
                 if response.status_code != 200:
-                    print(f"\n페이지 {page} 접근 실패")
+                    print(f"\n페이지 {page} 접근 실패", flush=True)
                     break
                     
                 soup = BeautifulSoup(response.text, 'html.parser')
                 review_items = soup.select('tr:not(.board-ad-box)')
                 
                 if not review_items:
-                    print("\n더 이상 게시글이 없습니다.")
+                    print("\n더 이상 게시글이 없습니다.", flush=True)
                     break
 
                 for item in review_items:
@@ -72,17 +72,17 @@ def crawl_mule_reviews(target_count=1000):
                             break
                         
                     except Exception as e:
-                        print(f"\n게시글 파싱 오류: {e}")
+                        print(f"\n게시글 파싱 오류: {e}", flush=True)
                         continue
 
                 # 진행상황 표시
                 if len(all_reviews) % 100 == 0:
-                    print(f"\n{len(all_reviews)}개 수집 완료")
+                    print(f"\n{len(all_reviews)}개 수집 완료", flush=True)
                 
                 page += 1
 
     except Exception as e:
-        print(f"\n크롤링 중단: {e}")
+        print(f"\n크롤링 중단: {e}", flush=True)
         
     finally:
         # 수집된 데이터 저장
@@ -134,46 +134,46 @@ def save_data(reviews):
         # 리뷰 데이터 저장
         with open('mule_reviews_1000.json', 'w', encoding='utf-8') as f:
             json.dump(reviews, f, ensure_ascii=False, indent=2)
-        print("\n리뷰 데이터 저장 완료")
+        print("\n리뷰 데이터 저장 완료", flush=True)
         
         # 통계 생성 및 저장
         stats = generate_statistics(reviews)
         with open('mule_reviews_stats.json', 'w', encoding='utf-8') as f:
             json.dump(stats, f, ensure_ascii=False, indent=2)
-        print("통계 데이터 저장 완료")
+        print("통계 데이터 저장 완료", flush=True)
         
     except Exception as e:
-        print(f"\n저장 오류: {e}")
+        print(f"\n저장 오류: {e}", flush=True)
 
 def print_statistics(stats):
     """통계 정보 출력"""
-    print("\n=== 수집 통계 ===")
-    print(f"총 게시글: {stats['total_reviews']}개")
-    print(f"총 조회수: {stats['total_views']:,}회")
-    print(f"평균 조회수: {stats['average_views']:,.1f}회")
+    print("\n=== 수집 통계 ===", flush=True)
+    print(f"총 게시글: {stats['total_reviews']}개", flush=True)
+    print(f"총 조회수: {stats['total_views']:,}회", flush=True)
+    print(f"평균 조회수: {stats['average_views']:,.1f}회", flush=True)
     
     print("\n=== 카테고리별 통계 ===")
     for category, data in sorted(stats['categories'].items(), 
                                key=lambda x: x[1]['count'], reverse=True):
-        print(f"\n{category}:")
-        print(f"  게시글 수: {data['count']}개")
-        print(f"  총 조회수: {data['total_views']:,}회")
-        print(f"  평균 조회수: {data['average_views']:,.1f}회")
+        print(f"\n{category}:", flush=True)
+        print(f"  게시글 수: {data['count']}개", flush=True)
+        print(f"  총 조회수: {data['total_views']:,}회", flush=True)
+        print(f"  평균 조회수: {data['average_views']:,.1f}회", flush=True)
     
     print("\n=== 인기 게시글 (상위 5개) ===")
     for i, post in enumerate(stats['top_viewed'][:5], 1):
-        print(f"\n{i}. {post['title']}")
-        print(f"   조회수: {post['view_count']:,}회")
-        print(f"   카테고리: {post['category']}")
+        print(f"\n{i}. {post['title']}", flush=True)
+        print(f"   조회수: {post['view_count']:,}회", flush=True)
+        print(f"   카테고리: {post['category']}", flush=True)
 
 def main():
-    print("뮬 리뷰 수집 시작...")
+    print("뮬 리뷰 수집 시작...", flush=True)
     reviews = crawl_mule_reviews(1000)
     
     if reviews:
         stats = generate_statistics(reviews)
         print_statistics(stats)
-        print(f"\n총 수집된 게시글: {len(reviews)}개")
+        print(f"\n총 수집된 게시글: {len(reviews)}개", flush=True)
 
 if __name__ == "__main__":
     main()
